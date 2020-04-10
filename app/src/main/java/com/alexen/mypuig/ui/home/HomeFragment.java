@@ -88,7 +88,7 @@ public class HomeFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     noticeViewModel.establecerElementoSeleccionado(notice);
-//                    navController.navigate(R.id.detalleElementoFragment);
+                    navController.navigate(R.id.detalleNoticiaFragment);
                 }
             });
         }

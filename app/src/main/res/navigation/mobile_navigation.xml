@@ -10,5 +10,10 @@
         android:name="com.alexen.mypuig.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/detalleNoticiaFragment"
+        android:name="com.alexen.mypuig.DetalleNoticiaFragment"
+        android:label="fragment_detalle_noticia"
+        tools:layout="@layout/fragment_detalle_noticia" />
 
 </navigation>

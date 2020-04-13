@@ -22,6 +22,18 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="filtrar_por">Filtrar por...</string>
+    <string name="profesorTitle">Profesor</string>
+    <string name="PreviewProfesor">Todos</string>
+    <string name="PreviewFecha">todas</string>
+    <string name="PreviewEtiqueta">todas</string>
+    <string name="etiquetaTitle">Etiqueta</string>
+    <string name="fechaTitle">Fecha</string>
+    <string name="ordenar_por">Ordenar por...</string>
+    <string name="ordenar_por2">Ordenar por</string>
+    <string name="nombre_z_a">Nombre, Z-A</string>
+    <string name="nombre_a_z">Nombre, A-Z</string>
+    <string name="fecha_nuevo_a_viejo">Fecha, nuevo a viejo</string>
 
 
 </resources>

@@ -15,5 +15,10 @@
         android:name="com.alexen.mypuig.DetalleNoticiaFragment"
         android:label="fragment_detalle_noticia"
         tools:layout="@layout/fragment_detalle_noticia" />
+    <fragment
+        android:id="@+id/filtrarFragment"
+        android:name="com.alexen.mypuig.FiltrarFragment"
+        android:label="fragment_filtrar"
+        tools:layout="@layout/fragment_filtrar" />
 
 </navigation>

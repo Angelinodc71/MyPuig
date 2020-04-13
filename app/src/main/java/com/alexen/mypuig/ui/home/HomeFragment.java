@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -29,6 +30,8 @@ public class HomeFragment extends Fragment {
     NoticeViewModel noticeViewModel;
     NavController navController;
     NoticiasAdapter noticiasAdapter;
+    ImageButton imageButton;
+
     public HomeFragment() {}
 
     @Override
@@ -45,6 +48,15 @@ public class HomeFragment extends Fragment {
 
         RecyclerView elementosRecyclerView = view.findViewById(R.id.item_list);
 
+        imageButton = view.findViewById(R.id.buttonFilter);
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navController.navigate(R.id.filtrarFragment);
+            }
+        });
+
         noticiasAdapter = new NoticiasAdapter();
         elementosRecyclerView.setAdapter(noticiasAdapter);
 
@@ -54,6 +66,9 @@ public class HomeFragment extends Fragment {
                 noticiasAdapter.establecerListaNoticias(notices);
             }
         });
+
+
+
     }
 
     class NoticiasAdapter extends RecyclerView.Adapter<NoticiasAdapter.NoticiasViewHolder>{

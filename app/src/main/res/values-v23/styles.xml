@@ -5,4 +5,19 @@
         <!-- Customize your theme here. -->
         <item name="android:titleTextColor">@color/colorButton</item>
     </style>
+
+    <style name="GreenText" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">#00FF00</item>
+        <item name="android:titleTextColor">#00FF00</item>
+    </style>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorButtonNormal">@color/colorButton</item>
+        <item name="android:titleTextColor">@color/colorAccent</item>
+
+    </style>
 </resources>

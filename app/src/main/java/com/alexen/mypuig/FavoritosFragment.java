@@ -1,16 +1,10 @@
-package com.alexen.mypuig.ui.home;
+package com.alexen.mypuig;
+
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.ImageButton;
-import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -18,24 +12,42 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.alexen.mypuig.R;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import com.alexen.mypuig.model.Notice;
+import com.alexen.mypuig.ui.home.HomeFragment;
 import com.alexen.mypuig.viewmodel.NoticeViewModel;
 
 import java.util.List;
 
-public class HomeFragment extends Fragment {
 
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class FavoritosFragment extends Fragment {
     NoticeViewModel noticeViewModel;
     NavController navController;
-    FavoritosAdapter noticiasAdapter;
-    ImageButton imageButton;
+    FavoritosAdapter favoritosAdapter;
 
-    public HomeFragment() {}
+
+
+    public FavoritosFragment() {
+        // Required empty public constructor
+    }
+
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_favoritos, container, false);
     }
 
     @Override
@@ -45,43 +57,32 @@ public class HomeFragment extends Fragment {
         noticeViewModel = ViewModelProviders.of(requireActivity()).get(NoticeViewModel.class);
         navController = Navigation.findNavController(view);
 
-        RecyclerView elementosRecyclerView = view.findViewById(R.id.item_list_anuncios);
+        RecyclerView elementosRecyclerView = view.findViewById(R.id.item_list_favoritos);
 
-        imageButton = view.findViewById(R.id.buttonFilter);
 
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navController.navigate(R.id.filtrarFragment);
-            }
-        });
-
-        noticiasAdapter = new FavoritosAdapter();
-        elementosRecyclerView.setAdapter(noticiasAdapter);
+        favoritosAdapter = new FavoritosAdapter();
+        elementosRecyclerView.setAdapter(favoritosAdapter);
 
         noticeViewModel.getListaNotices().observe(getViewLifecycleOwner(), new Observer<List<Notice>>() {
             @Override
             public void onChanged(List<Notice> notices) {
-                noticiasAdapter.establecerListaNoticias(notices);
+                favoritosAdapter.establecerListaNoticias(notices);
             }
         });
-
-
-
     }
 
-    class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.NoticiasViewHolder>{
+    class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.FavoritosViewHolder>{
 
         List<Notice> notices;
 
         @NonNull
         @Override
-        public NoticiasViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            return new NoticiasViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_notice, parent, false));
+        public FavoritosAdapter.FavoritosViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            return new FavoritosAdapter.FavoritosViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_favoritos, parent, false));
         }
 
         @Override
-        public void onBindViewHolder(@NonNull final NoticiasViewHolder holder, final int position) {
+        public void onBindViewHolder(@NonNull final FavoritosAdapter.FavoritosViewHolder holder, final int position) {
 
             final Notice notice = notices.get(position);
 
@@ -90,7 +91,6 @@ public class HomeFragment extends Fragment {
             holder.mensajeTextView.setText(notice.getMsgCorto());
             holder.fechaTextView.setText(notice.getFechaCorta());
             holder.favCheckBox.setChecked(notice.getFavNotice());
-
             holder.favCheckBox.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -117,18 +117,23 @@ public class HomeFragment extends Fragment {
             notifyDataSetChanged();
         }
 
-        class NoticiasViewHolder extends RecyclerView.ViewHolder {
+        class FavoritosViewHolder extends RecyclerView.ViewHolder {
             TextView autorTextView, temaTextView, mensajeTextView, fechaTextView;
             CheckBox favCheckBox;
-
-            NoticiasViewHolder(@NonNull View itemView) {
+            ImageView chat, share;
+            FavoritosViewHolder(@NonNull View itemView) {
                 super(itemView);
-                autorTextView = itemView.findViewById(R.id.textViewAutor);
-                temaTextView = itemView.findViewById(R.id.textViewTema);
-                mensajeTextView = itemView.findViewById(R.id.textViewMensajeCorto);
-                fechaTextView = itemView.findViewById(R.id.textViewFechaCorta);
-                favCheckBox = itemView.findViewById(R.id.checkBoxFav);
+                autorTextView = itemView.findViewById(R.id.textViewAutorFav);
+                temaTextView = itemView.findViewById(R.id.textViewTemaFav);
+                mensajeTextView = itemView.findViewById(R.id.textViewMensajeCortoFav);
+                fechaTextView = itemView.findViewById(R.id.textViewFechaCortaFav);
+                favCheckBox = itemView.findViewById(R.id.checkBoxFav2);
+                chat = itemView.findViewById(R.id.imageView2);
+                share = itemView.findViewById(R.id.imageView3);
+
+
             }
         }
     }
+
 }

@@ -37,7 +37,8 @@ public class NoticeViewModel extends AndroidViewModel {
                             "\n" +
                             "Los candidatos deberían tener el título de Técnico Superior de FP de cualquiera de las especialidades de informática (Administración de Sistemas Informáticos, Desarrollo de Aplicaciones Web, o bien Desarrollo de Aplicaciones Multiplataforma). La carga principal del trabajo se desarrollaría en nuestra sede de Barcelona, con posibilidad de viajes (no obligatorios) para la preparación de los sistemas informáticos implicados en campañas oceanográficas y realización de campañas como técnico informático a bordo de los buques oceanográficos del CSIC.\n",
                     "Monday, 27 May 2019, 11:15",
-                    "27 de mar.",false);
+                    "27 de mar.",
+                    true);
             notices.add(notice);
         }
         listaNotices.setValue(notices);

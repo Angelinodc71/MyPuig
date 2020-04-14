@@ -36,6 +36,10 @@
     <string name="fecha_nuevo_a_viejo">Fecha, nuevo a viejo</string>
     <string name="de">de</string>
     <string name="nueva_b_squeda">Nueva búsqueda</string>
+    <string name="compartir">Compartir</string>
+    <string name="chat">Chat</string>
+    <string name="iconcompartir">iconCompartir</string>
+    <string name="icon_chat">icon chat</string>
 
 
 </resources>

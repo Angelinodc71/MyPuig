@@ -20,5 +20,10 @@
         android:name="com.alexen.mypuig.FiltrarFragment"
         android:label="fragment_filtrar"
         tools:layout="@layout/fragment_filtrar" />
+    <fragment
+        android:id="@+id/nav_fav"
+        android:name="com.alexen.mypuig.FavoritosFragment"
+        android:label="fragment_favoritos"
+        tools:layout="@layout/fragment_favoritos" />
 
 </navigation>

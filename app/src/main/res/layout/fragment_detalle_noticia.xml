@@ -10,53 +10,54 @@
         android:id="@+id/diagonal"
         android:layout_width="411dp"
         android:layout_height="218dp"
+        android:baselineAlignBottom="false"
         android:scaleType="centerCrop"
         android:src="@color/colorAccent"
         squint:angle="20"
         squint:diagonalDirection="left_to_right"
         squint:gravity="right"
         squint:layout_constraintEnd_toEndOf="parent"
-        squint:layout_constraintHorizontal_bias="1.0"
+        squint:layout_constraintHorizontal_bias="0.0"
         squint:layout_constraintStart_toStartOf="parent"
         squint:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        squint:layout_constraintBottom_toBottomOf="parent"
-        squint:layout_constraintEnd_toEndOf="parent"
-        squint:layout_constraintStart_toStartOf="parent"
-        squint:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        tools:layout_editor_absoluteX="-63dp"
+        tools:layout_editor_absoluteY="48dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textViewMensajeDetalle"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_height="609dp"
+                android:layout_marginTop="216dp"
                 android:text="@string/mensaje"
-                squint:layout_constraintBottom_toBottomOf="parent"
                 squint:layout_constraintEnd_toEndOf="parent"
-                squint:layout_constraintStart_toStartOf="parent" />
-
-            <TextView
-                android:id="@+id/TextViewFechaDetalle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/fecha"
-                android:textColor="@color/colorAccent"
-                android:textStyle="bold"
-                tools:layout_editor_absoluteX="334dp"
-                tools:layout_editor_absoluteY="175dp" />
+                squint:layout_constraintHorizontal_bias="0.0"
+                squint:layout_constraintStart_toStartOf="parent"
+                squint:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 
-    </ScrollView>
+    <TextView
+        android:id="@+id/TextViewFechaDetalle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="24dp"
+        android:text="@string/fecha"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold"
+        squint:layout_constraintBottom_toBottomOf="@+id/diagonal"
+        squint:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/textViewTemaDetalle"
@@ -75,7 +76,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="de"
+        android:text="@string/de"
         squint:layout_constraintStart_toStartOf="parent"
         squint:layout_constraintTop_toBottomOf="@+id/textViewTemaDetalle" />
 

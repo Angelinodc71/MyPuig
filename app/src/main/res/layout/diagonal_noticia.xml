@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:squint="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.intrusoft.squint.DiagonalView
+        android:id="@+id/diagonal2"
+        squint:angle="20"
+        squint:diagonalDirection="left_to_right"
+        squint:gravity="right"
+        squint:layout_constraintEnd_toEndOf="parent"
+        squint:layout_constraintHorizontal_bias="0.0"
+        squint:layout_constraintStart_toStartOf="parent"
+        squint:layout_constraintTop_toTopOf="parent"
+        android:layout_width="411dp"
+        android:layout_height="218dp"
+        android:scaleType="centerCrop"
+        android:src="@color/colorAccent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

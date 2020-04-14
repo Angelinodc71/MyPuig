@@ -6,32 +6,18 @@
     xmlns:squint="http://schemas.android.com/apk/res-auto"
     tools:context=".DetalleNoticiaFragment">
 
-    <com.intrusoft.squint.DiagonalView
-        android:id="@+id/diagonal"
-        android:layout_width="411dp"
-        android:layout_height="218dp"
-        android:baselineAlignBottom="false"
-        android:scaleType="centerCrop"
-        android:src="@color/colorAccent"
-        squint:angle="20"
-        squint:diagonalDirection="left_to_right"
-        squint:gravity="right"
-        squint:layout_constraintEnd_toEndOf="parent"
-        squint:layout_constraintHorizontal_bias="0.0"
-        squint:layout_constraintStart_toStartOf="parent"
-        squint:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true"
-        tools:layout_editor_absoluteX="-63dp"
-        tools:layout_editor_absoluteY="48dp">
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                tools:layout_editor_absoluteX="-63dp"
+                tools:layout_editor_absoluteY="48dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textViewMensajeDetalle"
@@ -59,37 +45,58 @@
         squint:layout_constraintBottom_toBottomOf="@+id/diagonal"
         squint:layout_constraintEnd_toEndOf="parent" />
 
-    <TextView
-        android:id="@+id/textViewTemaDetalle"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/tema"
-        android:textSize="24sp"
-        squint:layout_constraintStart_toStartOf="parent"
-        squint:layout_constraintTop_toTopOf="parent" />
+        tools:ignore="MissingConstraints">
+        <com.intrusoft.squint.DiagonalView
+            android:id="@+id/diagonal"
+            android:layout_width="411dp"
+            android:layout_height="218dp"
+            android:baselineAlignBottom="false"
+            android:scaleType="centerCrop"
+            android:src="@color/colorAccent"
+            squint:angle="20"
+            squint:diagonalDirection="left_to_right"
+            squint:gravity="right"
+            squint:layout_constraintEnd_toEndOf="parent"
+            squint:layout_constraintHorizontal_bias="0.0"
+            squint:layout_constraintStart_toStartOf="parent"
+            squint:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/textViewTemaDetalle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/tema"
+            android:textSize="24sp"
+            squint:layout_constraintStart_toStartOf="parent"
+            squint:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textViewDe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/de"
-        squint:layout_constraintStart_toStartOf="parent"
-        squint:layout_constraintTop_toBottomOf="@+id/textViewTemaDetalle" />
+        <TextView
+            android:id="@+id/textViewDe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/de"
+            squint:layout_constraintStart_toStartOf="parent"
+            squint:layout_constraintTop_toBottomOf="@+id/textViewTemaDetalle" />
 
-    <TextView
-        android:id="@+id/textViewAutorDetalle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/autor"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimary"
-        squint:layout_constraintStart_toEndOf="@+id/textViewDe"
-        squint:layout_constraintTop_toBottomOf="@+id/textViewTemaDetalle" />
+        <TextView
+            android:id="@+id/textViewAutorDetalle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/autor"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            squint:layout_constraintStart_toEndOf="@+id/textViewDe"
+            squint:layout_constraintTop_toBottomOf="@+id/textViewTemaDetalle" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

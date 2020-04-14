@@ -96,7 +96,7 @@ public class DetalleNoticiaFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.main, menu);
+        inflater.inflate(R.menu.menu_detalle_noticia, menu);
         // You can look up you menu item here and store it in a global variable by
         // 'mMenuItem = menu.findItem(R.id.my_menu_item);'
     }

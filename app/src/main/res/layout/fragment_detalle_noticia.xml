@@ -12,50 +12,52 @@
                 android:layout_height="match_parent"
                 android:fillViewport="true"
                 tools:layout_editor_absoluteX="-63dp"
-                tools:layout_editor_absoluteY="48dp">
+                tools:layout_editor_absoluteY="48dp"
+                android:background="@color/colorBackground">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="8dp">
 
-            <TextView
-                android:id="@+id/textViewMensajeDetalle"
-                android:layout_width="0dp"
-                android:layout_height="609dp"
-                android:layout_marginTop="216dp"
-                android:text="@string/mensaje"
-                squint:layout_constraintEnd_toEndOf="parent"
-                squint:layout_constraintHorizontal_bias="0.0"
-                squint:layout_constraintStart_toStartOf="parent"
-                squint:layout_constraintTop_toTopOf="parent" />
+                    <TextView
+                        android:id="@+id/textViewMensajeDetalle"
+                        android:layout_width="0dp"
+                        android:layout_height="609dp"
+                        android:layout_marginTop="216dp"
+                        android:text="@string/mensaje"
+                        squint:layout_constraintEnd_toEndOf="parent"
+                        squint:layout_constraintHorizontal_bias="0.0"
+                        squint:layout_constraintStart_toStartOf="parent"
+                        squint:layout_constraintTop_toTopOf="parent" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        android:id="@+id/TextViewFechaDetalle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="32dp"
+                        android:text="@string/fecha"
+                        android:textColor="@color/colorAccent"
+                        android:textStyle="bold"
+                        squint:layout_constraintBottom_toTopOf="@+id/textViewMensajeDetalle"
+                        squint:layout_constraintEnd_toEndOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
-
-    <TextView
-        android:id="@+id/TextViewFechaDetalle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="24dp"
-        android:text="@string/fecha"
-        android:textColor="@color/colorAccent"
-        android:textStyle="bold"
-        squint:layout_constraintBottom_toBottomOf="@+id/diagonal"
-        squint:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints">
         <com.intrusoft.squint.DiagonalView
-            android:id="@+id/diagonal"
+            android:id="@+id/diagonalBlack"
             android:layout_width="411dp"
             android:layout_height="218dp"
             android:baselineAlignBottom="false"
             android:scaleType="centerCrop"
-            android:src="@color/colorAccent"
+            android:src="@color/black"
             squint:angle="20"
             squint:diagonalDirection="left_to_right"
             squint:gravity="right"
@@ -63,11 +65,32 @@
             squint:layout_constraintHorizontal_bias="0.0"
             squint:layout_constraintStart_toStartOf="parent"
             squint:layout_constraintTop_toTopOf="parent" />
+
+        <com.intrusoft.squint.DiagonalView
+            android:id="@+id/diagonal"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="1dp"
+            android:layout_marginBottom="1dp"
+            android:baselineAlignBottom="false"
+            android:scaleType="centerCrop"
+            android:src="#E9E9E9"
+            squint:angle="20"
+            squint:diagonalDirection="left_to_right"
+            squint:gravity="right"
+            squint:layout_constraintBottom_toBottomOf="parent"
+            squint:layout_constraintEnd_toEndOf="parent"
+            squint:layout_constraintHorizontal_bias="0.0"
+            squint:layout_constraintStart_toStartOf="parent"
+            squint:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/textViewTemaDetalle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:text="@string/tema"
             android:textSize="24sp"
@@ -78,7 +101,7 @@
             android:id="@+id/textViewDe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:text="@string/de"
             squint:layout_constraintStart_toStartOf="parent"

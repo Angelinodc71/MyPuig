@@ -31,6 +31,8 @@ public class DetalleNoticiaFragment extends Fragment {
 
     NoticeViewModel noticeViewModel;
 
+    private boolean noticeFav;
+    static Notice noticeTmp;
     TextView autorTextView, temaTextView, mensajeTextView, fechaTextView;
     CheckBox favCheckBox;
     public DetalleNoticiaFragment() {
@@ -63,14 +65,20 @@ public class DetalleNoticiaFragment extends Fragment {
 
         noticeViewModel.getNoticeSeleccionado().observe(getViewLifecycleOwner(), new Observer<Notice>() {
             @Override
-            public void onChanged(final Notice notice) {
+            public void onChanged(Notice notice) {
+
                 if(notice == null) return;
 
                 autorTextView.setText(notice.getAutor());
                 temaTextView.setText(notice.getTema());
                 mensajeTextView.setText(notice.getMsg());
                 fechaTextView.setText(notice.getFecha());
-
+                noticeFav = notice.getFavNotice();
+                noticeTmp = notice;
+                noticeTmp.setFavNotice(noticeFav);
+                if (notice.getFavNotice()!=noticeTmp.getFavNotice()){
+                    notice.setFavNotice(notice.getFavNotice());
+                }
             }
         });
     }
@@ -88,6 +96,11 @@ public class DetalleNoticiaFragment extends Fragment {
                 Intent shareIntent = Intent.createChooser(sendIntent, null);
                 startActivity(shareIntent);
                 return true;
+
+            case R.id.opcion_borrar_favorito:
+                item.setVisible(false);
+
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -97,6 +110,14 @@ public class DetalleNoticiaFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_detalle_noticia, menu);
+
+        MenuItem itemBorrarFav = menu.findItem(R.id.opcion_borrar_favorito);
+
+        if (!noticeFav){
+            itemBorrarFav.setVisible(false);
+        }else {
+            itemBorrarFav.setVisible(true);
+        }
         // You can look up you menu item here and store it in a global variable by
         // 'mMenuItem = menu.findItem(R.id.my_menu_item);'
     }

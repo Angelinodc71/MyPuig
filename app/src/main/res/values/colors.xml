@@ -6,5 +6,6 @@
     <color name="colorAppBar">#FFFFFF</color>
     <color name="colorButton">#FF473A</color>
     <color name="colorBackground">#EAEAEAEA</color>
+    <color name="colorBotonIconos">#C4C4C4</color>
 
 </resources>

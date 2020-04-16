@@ -40,6 +40,9 @@
     <string name="chat">Chat</string>
     <string name="iconcompartir">iconCompartir</string>
     <string name="icon_chat">icon chat</string>
+    <string name="borrar_favorito">borrar favorito</string>
+    <string name="escribe_tu_mensaje">Escribe tu mensaje...</string>
+    <string name="mensajepropio">MensajePropio</string>
 
 
 </resources>

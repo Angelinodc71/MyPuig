@@ -34,7 +34,8 @@
             android:layout_height="14dp"
             android:text="@string/mensaje"
             android:textSize="12sp"
-            app:layout_constraintEnd_toStartOf="@+id/checkBoxFav2"
+            app:layout_constraintEnd_toStartOf="@+id/textViewFechaCortaFav"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewTemaFav" />
 
@@ -52,7 +53,7 @@
 
         <CheckBox
             android:id="@+id/checkBoxFav2"
-            android:layout_width="28dp"
+            android:layout_width="wrap_content"
             android:layout_height="27dp"
             android:button="@drawable/fav_checkbox"
             android:checked="false"
@@ -70,7 +71,7 @@
             android:text="@string/tema"
             android:textColor="#000000"
             android:textSize="12sp"
-            app:layout_constraintEnd_toStartOf="@+id/checkBoxFav2"
+            app:layout_constraintEnd_toStartOf="@+id/textViewFechaCortaFav"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewAutorFav" />
 

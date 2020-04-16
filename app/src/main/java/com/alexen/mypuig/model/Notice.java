@@ -47,4 +47,8 @@ public class Notice {
     public boolean getFavNotice() {
         return favNotice;
     }
+
+    public void setFavNotice(boolean favNotice) {
+        this.favNotice = favNotice;
+    }
 }

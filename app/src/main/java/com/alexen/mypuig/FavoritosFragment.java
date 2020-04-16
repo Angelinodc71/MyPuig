@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
@@ -98,6 +99,12 @@ public class FavoritosFragment extends Fragment {
                 }
             });
 
+            holder.chat.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    navController.navigate(R.id.detalleChatFragment);
+                }
+            });
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -120,7 +127,7 @@ public class FavoritosFragment extends Fragment {
         class FavoritosViewHolder extends RecyclerView.ViewHolder {
             TextView autorTextView, temaTextView, mensajeTextView, fechaTextView;
             CheckBox favCheckBox;
-            ImageView chat, share;
+            Button chat, share;
             FavoritosViewHolder(@NonNull View itemView) {
                 super(itemView);
                 autorTextView = itemView.findViewById(R.id.textViewAutorFav);
@@ -128,8 +135,8 @@ public class FavoritosFragment extends Fragment {
                 mensajeTextView = itemView.findViewById(R.id.textViewMensajeCortoFav);
                 fechaTextView = itemView.findViewById(R.id.textViewFechaCortaFav);
                 favCheckBox = itemView.findViewById(R.id.checkBoxFav2);
-                chat = itemView.findViewById(R.id.imageView2);
-                share = itemView.findViewById(R.id.imageView3);
+                chat = itemView.findViewById(R.id.buttonChat);
+                share = itemView.findViewById(R.id.buttonCompartir);
 
 
             }

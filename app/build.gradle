@@ -39,5 +39,6 @@ dependencies {
     implementation 'com.github.IntruderShanky:Squint:3.0.1'
 //    implementation 'com.github.msayan:tutorial-view:v1.0.10'
     implementation 'com.codemybrainsout.onboarding:onboarder:1.0.4'
+    implementation 'com.mikhaellopez:circularimageview:4.1.0'
 
 }

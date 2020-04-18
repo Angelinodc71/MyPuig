@@ -43,6 +43,7 @@
     <string name="borrar_favorito">borrar favorito</string>
     <string name="escribe_tu_mensaje">Escribe tu mensaje...</string>
     <string name="mensajepropio">MensajePropio</string>
+    <string name="image">Image</string>
 
 
 </resources>

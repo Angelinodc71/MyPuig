@@ -4,29 +4,31 @@ import java.io.Serializable;
 
 public class Chat implements Serializable {
 
-    private int id;
+    private String autor;
+    private String tema;
+    private String imgaAutor;
+    private Mensaje mensaje;
 
-    private String mensajePropio;
-    private String mensajeAjeno;
+    public Chat(String autor, String tema, String imgaAutor) {
 
-    public Chat(String mensajePropio, String mensajeAjeno) {
-        this.mensajePropio = mensajePropio;
-        this.mensajeAjeno = mensajeAjeno;
+        this.autor = autor;
+        this.tema = tema;
+        this.imgaAutor = imgaAutor;
     }
 
-    public String getMensajePropio() {
-        return mensajePropio;
+    public String getAutor() {
+        return autor;
     }
 
-    public void setMensajePropio(String mensajePropio) {
-        this.mensajePropio = mensajePropio;
+    public String getTema() {
+        return tema;
     }
 
-    public String getMensajeAjeno() {
-        return mensajeAjeno;
+    public String getImgaAutor() {
+        return imgaAutor;
     }
 
-    public void setMensajeAjeno(String mensajeAjeno) {
-        this.mensajeAjeno = mensajeAjeno;
+    public Mensaje getMensaje() {
+        return mensaje;
     }
 }

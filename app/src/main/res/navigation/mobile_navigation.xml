@@ -30,5 +30,10 @@
         android:name="com.alexen.mypuig.DetalleChatFragment"
         android:label="viewholder_chat"
         tools:layout="@layout/detalle_chat" />
+    <fragment
+        android:id="@+id/nav_chat"
+        android:name="com.alexen.mypuig.ListaChatsFragment"
+        android:label="fragment_lista_chats"
+        tools:layout="@layout/fragment_lista_chats" />
 
 </navigation>

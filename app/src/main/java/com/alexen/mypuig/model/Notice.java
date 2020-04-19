@@ -7,16 +7,18 @@ public class Notice {
     private String msg;
     private String fecha;
     private String fechaCorta;
+    private String imgAutor;
 
     private boolean favNotice;
 
-    public Notice(String autor, String tema, String msgCorto, String msg, String fecha, String fechaCorta, boolean favNotice) {
+    public Notice(String autor, String tema, String msgCorto, String msg, String fecha, String fechaCorta, String imgAutor, boolean favNotice) {
         this.autor = autor;
         this.tema = tema;
         this.msgCorto = msgCorto;
         this.msg = msg;
         this.fecha = fecha;
         this.fechaCorta = fechaCorta;
+        this.imgAutor = imgAutor;
         this.favNotice = favNotice;
     }
 
@@ -50,5 +52,9 @@ public class Notice {
 
     public void setFavNotice(boolean favNotice) {
         this.favNotice = favNotice;
+    }
+
+    public String getImgAutor() {
+        return imgAutor;
     }
 }

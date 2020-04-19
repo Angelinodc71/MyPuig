@@ -1,6 +1,7 @@
 package com.alexen.mypuig;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -29,9 +30,11 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.alexen.mypuig.model.Chat;
+import com.alexen.mypuig.model.Mensaje;
+import com.alexen.mypuig.model.Notice;
 import com.alexen.mypuig.viewmodel.ChatViewModel;
+import com.alexen.mypuig.viewmodel.NoticeViewModel;
 
-import java.util.EmptyStackException;
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
@@ -42,16 +45,21 @@ import static android.app.Activity.RESULT_OK;
  */
 public class DetalleChatFragment extends Fragment {
 
+    NoticeViewModel noticeViewModel;
+
     ChatViewModel chatViewModel;
     NavController navController;
     MensajeAdapter mensajeAdapter;
+
+    EditText editTextMensaje;
+    TextView fechaTextView, temaTextView;
+    ImageView imageViewAccount;
+
     private ImageButton sendButton, cameraButton, galleryButton;
-    private EditText editTextMensaje;
 
     public MutableLiveData<TipoMSG> estadoDelMSG = new MutableLiveData<>();
 
     public enum TipoMSG {
-        INITIAL,
         IMAGE,
         TEXT,
         VIDEO
@@ -78,9 +86,8 @@ public class DetalleChatFragment extends Fragment {
 
         galleryButton = view.findViewById(R.id.imageButtonClip);
         cameraButton = view.findViewById(R.id.imageButtonCamera);
-
-        sendButton = view.findViewById(R.id.imageButtonSend);
         editTextMensaje = view.findViewById(R.id.editTextMensaje);
+        sendButton = view.findViewById(R.id.imageButtonSend);
 
         galleryButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,7 +100,7 @@ public class DetalleChatFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 estadoDelMSG.setValue(TipoMSG.TEXT);
-                chatViewModel.insertarMensajeChat(editTextMensaje.getText().toString());
+                chatViewModel.insertarMensaje(editTextMensaje.getText().toString());
             }
         });
 
@@ -103,42 +110,67 @@ public class DetalleChatFragment extends Fragment {
         mensajeAdapter = new MensajeAdapter();
         elementosRecyclerView.setAdapter(mensajeAdapter);
 
-        chatViewModel.getListaMensajes().observe(getViewLifecycleOwner(), new Observer<List<Chat>>() {
+        noticeViewModel = ViewModelProviders.of(requireActivity()).get(NoticeViewModel.class);
+
+        fechaTextView = view.findViewById(R.id.textViewFechaChat);
+        temaTextView = view.findViewById(R.id.textViewTituloChat);
+        imageViewAccount = view.findViewById(R.id.imageViewAccount);
+
+
+        chatViewModel.getListaMensajes().observe(getViewLifecycleOwner(), new Observer<List<Mensaje>>() {
             @Override
-            public void onChanged(List<Chat> mensajes) {
-                mensajeAdapter.establecerListaMensajes(mensajes);
+            public void onChanged(List<Mensaje> msg) {
+                mensajeAdapter.establecerListaMensajes(msg);
             }
         });
-    }
-    class MensajeAdapter extends RecyclerView.Adapter<MensajeAdapter.ChatViewHolder>{
 
-        List<Chat> chats;
+        noticeViewModel.getNoticeSeleccionado().observe(getViewLifecycleOwner(), new Observer<Notice>() {
+            @Override
+            public void onChanged(Notice notice) {
+
+                if(notice == null) return;
+
+                fechaTextView.setText(notice.getFechaCorta());
+                temaTextView.setText(notice.getTema());
+                imageViewAccount.setImageURI(Uri.parse(notice.getImgAutor()));
+            }
+        });
+
+    }
+    class MensajeAdapter extends RecyclerView.Adapter<MensajeAdapter.MensajeViewHolder>{
+
+        List<Mensaje> mensajes;
 
         @NonNull
         @Override
-        public ChatViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            return new ChatViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_mensaje, parent, false));
+        public MensajeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            return new MensajeViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_mensaje, parent, false));
         }
 
         @Override
-        public void onBindViewHolder(@NonNull ChatViewHolder holder, final int position) {
+        public void onBindViewHolder(@NonNull MensajeViewHolder holder, final int position) {
 
-            final Chat chat = chats.get(position);
+            final Mensaje mensaje = mensajes.get(position);
+            holder.mensajeTextView.setVisibility(View.GONE);
+            holder.videoViewPreview.setVisibility(View.GONE);
+            holder.imageViewPreview.setVisibility(View.GONE);
 
 //            holder.nombreTextView.setText(chat.getMensajeAjeno());
 
+            Log.e("alv",mensaje.getMensaje());
             if (estadoDelMSG.getValue()== TipoMSG.IMAGE){
-                holder.imageViewPreview.setImageURI(Uri.parse(chat.getMensajePropio()));
+                holder.imageViewPreview.setVisibility(View.VISIBLE);
+                holder.imageViewPreview.setImageURI(Uri.parse(mensaje.getMensaje()));
                 Toast.makeText(getContext(),"Imagen enviado",Toast.LENGTH_SHORT).show();
             }else if (estadoDelMSG.getValue()== TipoMSG.VIDEO){
-                holder.videoViewPreview.setVideoURI(Uri.parse(chat.getMensajePropio()));
+                holder.videoViewPreview.setVisibility(View.VISIBLE);
+                holder.videoViewPreview.setVideoURI(Uri.parse(mensaje.getMensaje()));
                 Toast.makeText(getContext(),"Video enviado",Toast.LENGTH_SHORT).show();
             }else if (estadoDelMSG.getValue()== TipoMSG.TEXT){
-                holder.mensajeTextView.setText(chat.getMensajePropio());
+                holder.mensajeTextView.setVisibility(View.VISIBLE);
+                holder.mensajeTextView.setText(mensaje.getMensaje());
                 Toast.makeText(getContext(),"Texto enviado",Toast.LENGTH_SHORT).show();
             }
-
-
 
 //            holder.itemView.setOnClickListener(new View.OnClickListener() {
 //                @Override
@@ -151,23 +183,21 @@ public class DetalleChatFragment extends Fragment {
 
         @Override
         public int getItemCount() {
-            return chats == null ? 0 : chats.size();
+            return mensajes == null ? 0 : mensajes.size();
         }
 
-        public void establecerListaMensajes(List<Chat> chats){
-            this.chats = chats;
+        public void establecerListaMensajes(List<Mensaje> mensajes){
+            this.mensajes = mensajes;
             notifyDataSetChanged();
         }
 
-        class ChatViewHolder extends RecyclerView.ViewHolder {
-            TextView mensajeTextView, temaTextView, fechaTextView;
+        class MensajeViewHolder extends RecyclerView.ViewHolder {
+            TextView mensajeTextView;
             ImageView imageViewPreview;
             VideoView videoViewPreview;
-            public ChatViewHolder(@NonNull View itemView) {
+            public MensajeViewHolder(@NonNull View itemView) {
                 super(itemView);
                 mensajeTextView = itemView.findViewById(R.id.textViewMensajePropio);
-                temaTextView = itemView.findViewById(R.id.textViewTituloChat);
-                fechaTextView = itemView.findViewById(R.id.textViewFechaChat);
                 imageViewPreview = itemView.findViewById(R.id.imageViewPreviewMSG);
                 videoViewPreview = itemView.findViewById(R.id.videoViewPreviewMSG);
             }
@@ -176,9 +206,12 @@ public class DetalleChatFragment extends Fragment {
 
 
 
+    @SuppressLint("IntentReset")
     public void abrirGaleria(){
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("image/");
+        estadoDelMSG.setValue(TipoMSG.IMAGE);
+
         startActivityForResult(Intent.createChooser(intent,"Seleccione la aplicacion"),10);
     }
 
@@ -187,8 +220,7 @@ public class DetalleChatFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode==RESULT_OK){
             Uri path = data.getData();
-            estadoDelMSG.setValue(TipoMSG.IMAGE);
-            chatViewModel.insertarMensajeChat(String.valueOf(path));
+            chatViewModel.insertarMensaje(String.valueOf(path));
         }
     }
 }

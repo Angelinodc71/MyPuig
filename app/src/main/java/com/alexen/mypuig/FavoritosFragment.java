@@ -102,6 +102,7 @@ public class FavoritosFragment extends Fragment {
             holder.chat.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    noticeViewModel.establecerElementoSeleccionado(notice);
                     navController.navigate(R.id.detalleChatFragment);
                 }
             });

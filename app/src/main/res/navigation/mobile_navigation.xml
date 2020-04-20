@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.alexen.mypuig.ui.home.HomeFragment"
+        android:name="com.alexen.mypuig.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
     <fragment
@@ -35,5 +35,10 @@
         android:name="com.alexen.mypuig.ListaChatsFragment"
         android:label="fragment_lista_chats"
         tools:layout="@layout/fragment_lista_chats" />
+    <fragment
+        android:id="@+id/nav_alert"
+        android:name="com.alexen.mypuig.AlertasFragment"
+        android:label="Alertas"
+        tools:layout="@layout/fragment_alertas" />
 
 </navigation>

@@ -44,6 +44,10 @@
     <string name="escribe_tu_mensaje">Escribe tu mensaje...</string>
     <string name="mensajepropio">MensajePropio</string>
     <string name="image">Image</string>
+    <string name="ejemplos_profes">Oscar Torrente, Victor Carceler, DAM, ASIX, formació</string>
+    <string name="m_vil">Móvil</string>
+    <string name="email">Email</string>
+    <string name="notificaciones">Notificaciones</string>
 
 
 </resources>

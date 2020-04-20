@@ -18,12 +18,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alexen.mypuig.model.Notice;
-import com.alexen.mypuig.ui.home.HomeFragment;
 import com.alexen.mypuig.viewmodel.NoticeViewModel;
 
 import java.util.List;

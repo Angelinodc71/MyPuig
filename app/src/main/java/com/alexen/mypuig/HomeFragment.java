@@ -1,4 +1,4 @@
-package com.alexen.mypuig.ui.home;
+package com.alexen.mypuig;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

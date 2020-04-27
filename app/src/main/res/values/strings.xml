@@ -48,6 +48,13 @@
     <string name="m_vil">Móvil</string>
     <string name="email">Email</string>
     <string name="notificaciones">Notificaciones</string>
+    <string name="nombre">Nombre</string>
+    <string name="apellidos">Apellidos</string>
+    <string name="nacimiento">Nacimiento</string>
+    <string name="contacto">Contacto</string>
+    <string name="localidad">Localidad</string>
+    <string name="administraci_n_de_cuentas">ADMINISTRACIÓN DE CUENTAS</string>
+    <string name="cerrar_sesi_n">CERRAR SESIÓN</string>
 
 
 </resources>

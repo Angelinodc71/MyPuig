@@ -26,6 +26,7 @@
                         android:layout_width="0dp"
                         android:layout_height="609dp"
                         android:layout_marginTop="216dp"
+                        android:fontFamily="@font/source_sans_pro"
                         android:text="@string/mensaje"
                         squint:layout_constraintEnd_toEndOf="parent"
                         squint:layout_constraintHorizontal_bias="0.0"
@@ -38,6 +39,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="16dp"
                         android:layout_marginBottom="32dp"
+                        android:fontFamily="@font/source_sans_pro_bold"
                         android:text="@string/fecha"
                         android:textColor="@color/colorAccent"
                         android:textStyle="bold"
@@ -92,6 +94,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
+            android:fontFamily="@font/source_sans_pro_bold"
             android:text="@string/tema"
             android:textSize="24sp"
             squint:layout_constraintStart_toStartOf="parent"
@@ -103,6 +106,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
+            android:fontFamily="@font/source_sans_pro"
             android:text="@string/de"
             squint:layout_constraintStart_toStartOf="parent"
             squint:layout_constraintTop_toBottomOf="@+id/textViewTemaDetalle" />
@@ -113,9 +117,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
+            android:fontFamily="@font/source_sans_pro_semibold"
             android:text="@string/autor"
-            android:textStyle="bold"
             android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
             squint:layout_constraintStart_toEndOf="@+id/textViewDe"
             squint:layout_constraintTop_toBottomOf="@+id/textViewTemaDetalle" />
     </androidx.constraintlayout.widget.ConstraintLayout>

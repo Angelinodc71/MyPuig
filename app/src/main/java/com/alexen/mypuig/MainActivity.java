@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
 
+        toolbar.setLogo(R.drawable.logo);
+
         toolbar.setTitleTextColor(Color.parseColor("#FF473A"));
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(

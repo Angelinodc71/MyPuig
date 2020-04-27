@@ -204,7 +204,6 @@
                         android:id="@+id/textViewPreviewEtiqueta"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/source_sans_pro_light"
                         android:text="@string/PreviewEtiqueta"
                         android:textColor="#8F8F8F"
                         android:textSize="12sp"

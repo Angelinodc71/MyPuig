@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import com.alexen.mypuig.model.Notice;
 import com.alexen.mypuig.viewmodel.NoticeViewModel;
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -85,8 +86,8 @@ public class ListaChatsFragment extends Fragment {
 
             holder.autorTextView.setText(notice.getAutor());
             holder.temaTextView.setText(notice.getTema());
-            holder.imageViewAutor.setImageURI(Uri.parse(notice.getImgAutor()));
 
+            Glide.with(requireActivity()).load(R.drawable.user_image).into(holder.imageViewAutor);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

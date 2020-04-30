@@ -17,6 +17,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -34,7 +35,9 @@ import com.alexen.mypuig.model.Mensaje;
 import com.alexen.mypuig.model.Notice;
 import com.alexen.mypuig.viewmodel.ChatViewModel;
 import com.alexen.mypuig.viewmodel.NoticeViewModel;
+import com.bumptech.glide.Glide;
 
+import java.io.File;
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
@@ -54,6 +57,7 @@ public class DetalleChatFragment extends Fragment {
     EditText editTextMensaje;
     TextView fechaTextView, temaTextView;
     ImageView imageViewAccount;
+    public static final int cameraData = 0;
 
     private ImageButton sendButton, cameraButton, galleryButton;
 
@@ -96,6 +100,12 @@ public class DetalleChatFragment extends Fragment {
             }
         });
 
+        cameraButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abrirCamera();
+            }
+        });
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,7 +142,7 @@ public class DetalleChatFragment extends Fragment {
 
                 fechaTextView.setText(notice.getFechaCorta());
                 temaTextView.setText(notice.getTema());
-                imageViewAccount.setImageURI(Uri.parse(notice.getImgAutor()));
+                Glide.with(requireActivity()).load(R.drawable.user_image).into(imageViewAccount);
             }
         });
 
@@ -214,14 +224,22 @@ public class DetalleChatFragment extends Fragment {
 
         startActivityForResult(Intent.createChooser(intent,"Seleccione la aplicacion"),10);
     }
+    @SuppressLint("IntentReset")
+    public void abrirCamera(){
+        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
 
+        startActivityForResult(intent, cameraData);
+    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode==RESULT_OK){
+
             Uri path = data.getData();
+            Log.e("wow", String.valueOf(path));
             chatViewModel.insertarMensaje(String.valueOf(path));
         }
+
     }
 }
 

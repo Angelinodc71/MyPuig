@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.alexen.mypuig.api.Connection;
+
 public class SplashActivity extends AppCompatActivity {
 
     Handler handler;
@@ -24,5 +26,6 @@ public class SplashActivity extends AppCompatActivity {
             }
         },3000);
 
+        Connection.startConnection();
     }
 }

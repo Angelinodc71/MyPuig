@@ -50,5 +50,10 @@
         android:name="com.alexen.mypuig.PerfilFragment"
         android:label="Perfil"
         tools:layout="@layout/fragment_perfil" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.alexen.mypuig.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
 
 </navigation>

@@ -20,12 +20,12 @@ public class SplashActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                Connection.startConnection();
                 Intent intent=new Intent(SplashActivity.this,OnBoardActivity.class);
                 startActivity(intent);
                 finish();
             }
         },3000);
 
-        Connection.startConnection();
     }
 }

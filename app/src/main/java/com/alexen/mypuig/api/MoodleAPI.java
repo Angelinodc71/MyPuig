@@ -12,7 +12,7 @@ public interface MoodleAPI{
     Call<Token> login(@Query("username") String username, @Query("password") String password);
 
     @GET("webservice/rest/server.php?moodlewsrestformat=json&wsfunction=mod_forum_get_forum_discussions_paginated")
-    Call<Discussion> discussions(@Query("wstoken") String wstoken, @Query("forumid") String forumid);
+    Call<Discussions> discussions(@Query("wstoken") String wstoken, @Query("forumid") String forumid);
 
 //    @GET("webservice/rest/server.php?wsfunction=core_enrol_get_enrolled_users&moodlewsrestformat=json")
 //    Call<List<Student>> students(@Query("wstoken") String wstoken, @Query("courseid") String courseId);

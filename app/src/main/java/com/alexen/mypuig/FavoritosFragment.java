@@ -20,6 +20,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import com.alexen.mypuig.api.Discussion;
 import com.alexen.mypuig.model.Notice;
 import com.alexen.mypuig.viewmodel.NoticeViewModel;
 
@@ -61,17 +62,17 @@ public class FavoritosFragment extends Fragment {
         favoritosAdapter = new FavoritosAdapter();
         elementosRecyclerView.setAdapter(favoritosAdapter);
 
-        noticeViewModel.getListaNotices().observe(getViewLifecycleOwner(), new Observer<List<Notice>>() {
+        noticeViewModel.getListaNotices().observe(getViewLifecycleOwner(), new Observer<List<Discussion>>() {
             @Override
-            public void onChanged(List<Notice> notices) {
-                favoritosAdapter.establecerListaNoticias(notices);
+            public void onChanged(List<Discussion> discussions) {
+                favoritosAdapter.establecerListaNoticias(discussions);
             }
         });
     }
 
     class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.FavoritosViewHolder>{
 
-        List<Notice> notices;
+        List<Discussion> discussions;
 
         @NonNull
         @Override
@@ -80,33 +81,33 @@ public class FavoritosFragment extends Fragment {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull final FavoritosAdapter.FavoritosViewHolder holder, final int position) {
+        public void onBindViewHolder(@NonNull final FavoritosViewHolder holder, final int position) {
 
-            final Notice notice = notices.get(position);
+            final Discussion discussion = discussions.get(position);
 
-            holder.autorTextView.setText(notice.getAutor());
-            holder.temaTextView.setText(notice.getTema());
-            holder.mensajeTextView.setText(notice.getMsgCorto());
-            holder.fechaTextView.setText(notice.getFechaCorta());
-            holder.favCheckBox.setChecked(notice.getFavNotice());
-            holder.favCheckBox.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    holder.favCheckBox.setChecked(isChecked);
-                }
-            });
+            holder.autorTextView.setText(discussion.name);
+            holder.temaTextView.setText(discussion.name);
+            holder.mensajeTextView.setText(discussion.message);
+//            holder.timemodifiedTextView.setText(discussion.getFechaCorta());
+//            holder.favCheckBox.setChecked(discussion.getFavNotice());
+//            holder.favCheckBox.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener() {
+//                @Override
+//                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                    holder.favCheckBox.setChecked(isChecked);
+//                }
+//            });
 
             holder.chat.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    noticeViewModel.establecerElementoSeleccionado(notice);
+                    noticeViewModel.establecerElementoSeleccionado(discussion);
                     navController.navigate(R.id.detalleChatFragment);
                 }
             });
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    noticeViewModel.establecerElementoSeleccionado(notice);
+                    noticeViewModel.establecerElementoSeleccionado(discussion);
                     navController.navigate(R.id.detalleNoticiaFragment);
                 }
             });
@@ -114,11 +115,11 @@ public class FavoritosFragment extends Fragment {
 
         @Override
         public int getItemCount() {
-            return notices == null ? 0 : notices.size();
+            return discussions == null ? 0 : discussions.size();
         }
 
-        public void establecerListaNoticias(List<Notice> notices){
-            this.notices = notices;
+        public void establecerListaNoticias(List<Discussion> discussions){
+            this.discussions = discussions;
             notifyDataSetChanged();
         }
 

@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import com.alexen.mypuig.api.Discussion;
 import com.alexen.mypuig.model.Notice;
 import com.alexen.mypuig.viewmodel.NoticeViewModel;
 import com.intrusoft.squint.DiagonalView;
@@ -63,22 +65,21 @@ public class DetalleNoticiaFragment extends Fragment {
         mensajeTextView = view.findViewById(R.id.textViewMensajeDetalle);
         fechaTextView = view.findViewById(R.id.TextViewFechaDetalle);
 
-        noticeViewModel.getNoticeSeleccionado().observe(getViewLifecycleOwner(), new Observer<Notice>() {
+        noticeViewModel.getNoticeSeleccionado().observe(getViewLifecycleOwner(), new Observer<Discussion>() {
             @Override
-            public void onChanged(Notice notice) {
+            public void onChanged(Discussion discussion) {
 
-                if(notice == null) return;
+                if(discussion == null) return;
 
-                autorTextView.setText(notice.getAutor());
-                temaTextView.setText(notice.getTema());
-                mensajeTextView.setText(notice.getMsg());
-                fechaTextView.setText(notice.getFecha());
-                noticeFav = notice.getFavNotice();
-                noticeTmp = notice;
-                noticeTmp.setFavNotice(noticeFav);
-                if (notice.getFavNotice()!=noticeTmp.getFavNotice()){
-                    notice.setFavNotice(notice.getFavNotice());
-                }
+                autorTextView.setText(Html.fromHtml(discussion.name));
+                mensajeTextView.setText(Html.fromHtml(discussion.message));
+                fechaTextView.setText(Html.fromHtml(discussion.name));
+//                noticeFav = discussion.getFavNotice();
+//                noticeTmp = discussion;
+//                noticeTmp.setFavNotice(noticeFav);
+//                if (discussion.getFavNotice()!=noticeTmp.getFavNotice()){
+//                    discussion.setFavNotice(discussion.getFavNotice());
+//                }
             }
         });
     }

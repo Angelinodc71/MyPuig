@@ -30,6 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.alexen.mypuig.api.Discussion;
 import com.alexen.mypuig.model.Chat;
 import com.alexen.mypuig.model.Mensaje;
 import com.alexen.mypuig.model.Notice;
@@ -134,14 +135,14 @@ public class DetalleChatFragment extends Fragment {
             }
         });
 
-        noticeViewModel.getNoticeSeleccionado().observe(getViewLifecycleOwner(), new Observer<Notice>() {
+        noticeViewModel.getNoticeSeleccionado().observe(getViewLifecycleOwner(), new Observer<Discussion>() {
             @Override
-            public void onChanged(Notice notice) {
+            public void onChanged(Discussion discussion) {
 
-                if(notice == null) return;
+                if(discussion == null) return;
 
-                fechaTextView.setText(notice.getFechaCorta());
-                temaTextView.setText(notice.getTema());
+                fechaTextView.setText(discussion.name);
+                temaTextView.setText(discussion.name);
                 Glide.with(requireActivity()).load(R.drawable.user_image).into(imageViewAccount);
             }
         });

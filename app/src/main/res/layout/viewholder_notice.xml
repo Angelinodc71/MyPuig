@@ -36,14 +36,15 @@
             android:fontFamily="@font/source_sans_pro"
             android:text="@string/mensaje"
             android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/textViewFechaCorta"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewTema" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/textViewAutor"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
             android:fontFamily="@font/source_sans_pro_semibold"
             android:text="@string/autor"
             android:textColor="#000000"
@@ -63,8 +64,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textViewTema"
             app:layout_constraintStart_toStartOf="@+id/textViewFechaCorta"
-            app:layout_constraintTop_toBottomOf="@+id/textViewFechaCorta"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewFechaCorta" />
 
         <TextView
             android:id="@+id/textViewTema"
@@ -74,7 +74,8 @@
             android:text="@string/tema"
             android:textColor="#000000"
             android:textSize="12sp"
-            app:layout_constraintEnd_toStartOf="@+id/textViewFechaCorta"
+            app:layout_constraintBottom_toTopOf="@+id/textViewMensajeCorto"
+            app:layout_constraintEnd_toStartOf="@+id/checkBoxFav"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewAutor" />
     </androidx.constraintlayout.widget.ConstraintLayout>

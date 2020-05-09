@@ -1,6 +1,7 @@
 package com.alexen.mypuig;
 
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +19,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.alexen.mypuig.R;
-import com.alexen.mypuig.model.Notice;
+import com.alexen.mypuig.api.Discussion;
 import com.alexen.mypuig.viewmodel.NoticeViewModel;
 
 import java.util.List;
@@ -59,10 +59,10 @@ public class HomeFragment extends Fragment {
         noticiasAdapter = new FavoritosAdapter();
         elementosRecyclerView.setAdapter(noticiasAdapter);
 
-        noticeViewModel.getListaNotices().observe(getViewLifecycleOwner(), new Observer<List<Notice>>() {
+        noticeViewModel.getListaNotices().observe(getViewLifecycleOwner(), new Observer<List<Discussion>>() {
             @Override
-            public void onChanged(List<Notice> notices) {
-                noticiasAdapter.establecerListaNoticias(notices);
+            public void onChanged(List<Discussion> discussions) {
+                noticiasAdapter.establecerListaNoticias(discussions);
             }
         });
 
@@ -72,7 +72,7 @@ public class HomeFragment extends Fragment {
 
     class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.NoticiasViewHolder>{
 
-        List<Notice> notices;
+        List<Discussion> discussions;
 
         @NonNull
         @Override
@@ -83,14 +83,18 @@ public class HomeFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull final NoticiasViewHolder holder, final int position) {
 
-            final Notice notice = notices.get(position);
+            final Discussion discussion = this.discussions.get(position);
 
-            holder.autorTextView.setText(notice.getAutor());
-            holder.temaTextView.setText(notice.getTema());
-            holder.mensajeTextView.setText(notice.getMsgCorto());
-            holder.fechaTextView.setText(notice.getFechaCorta());
-            holder.favCheckBox.setChecked(notice.getFavNotice());
+//            holder.userfullnameTextView.setText(discussions.getAutor());
+//            holder.nameTextView.setText(discussions.getTema());
+//            holder.mensajeTextView.setText(discussions.getMsgCorto());
+//            holder.timemodifiedTextView.setText(discussions.getFechaCorta());
+//            holder.favCheckBox.setChecked(discussions.getFavNotice());
 
+            holder.userfullnameTextView.setText(discussion.userfullname);
+            holder.nameTextView.setText(discussion.name);
+            holder.mensajeTextView.setText(Html.fromHtml(discussion.message));
+            holder.timemodifiedTextView.setText(TimeConverter.converter(discussion.timemodified));
             holder.favCheckBox.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -101,7 +105,7 @@ public class HomeFragment extends Fragment {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    noticeViewModel.establecerElementoSeleccionado(notice);
+                    noticeViewModel.establecerElementoSeleccionado(discussion);
                     navController.navigate(R.id.detalleNoticiaFragment);
                 }
             });
@@ -109,24 +113,24 @@ public class HomeFragment extends Fragment {
 
         @Override
         public int getItemCount() {
-            return notices == null ? 0 : notices.size();
+            return discussions == null ? 0 : discussions.size();
         }
 
-        public void establecerListaNoticias(List<Notice> notices){
-            this.notices = notices;
+        public void establecerListaNoticias(List<Discussion> discussions){
+            this.discussions = discussions;
             notifyDataSetChanged();
         }
 
         class NoticiasViewHolder extends RecyclerView.ViewHolder {
-            TextView autorTextView, temaTextView, mensajeTextView, fechaTextView;
+            TextView userfullnameTextView, nameTextView, mensajeTextView, timemodifiedTextView;
             CheckBox favCheckBox;
 
             NoticiasViewHolder(@NonNull View itemView) {
                 super(itemView);
-                autorTextView = itemView.findViewById(R.id.textViewAutor);
-                temaTextView = itemView.findViewById(R.id.textViewTema);
+                userfullnameTextView = itemView.findViewById(R.id.textViewAutor);
+                nameTextView = itemView.findViewById(R.id.textViewTema);
                 mensajeTextView = itemView.findViewById(R.id.textViewMensajeCorto);
-                fechaTextView = itemView.findViewById(R.id.textViewFechaCorta);
+                timemodifiedTextView = itemView.findViewById(R.id.textViewFechaCorta);
                 favCheckBox = itemView.findViewById(R.id.checkBoxFav);
             }
         }

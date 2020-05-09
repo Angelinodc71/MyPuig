@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alexen.mypuig.api.Discussion;
 import com.alexen.mypuig.model.Notice;
 import com.alexen.mypuig.viewmodel.NoticeViewModel;
 import com.bumptech.glide.Glide;
@@ -61,9 +62,9 @@ public class ListaChatsFragment extends Fragment {
         chatAdapter = new ChatAdapter();
         elementosRecyclerView.setAdapter(chatAdapter);
 
-        noticeViewModel.getListaNotices().observe(getViewLifecycleOwner(), new Observer<List<Notice>>() {
+        noticeViewModel.getListaNotices().observe(getViewLifecycleOwner(), new Observer<List<Discussion>>() {
             @Override
-            public void onChanged(List<Notice> chats) {
+            public void onChanged(List<Discussion> chats) {
                 chatAdapter.establecerListaMensajes(chats);
             }
         });
@@ -71,7 +72,7 @@ public class ListaChatsFragment extends Fragment {
 
     class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder>{
 
-        List<Notice> chats;
+        List<Discussion> chats;
 
         @NonNull
         @Override
@@ -82,16 +83,16 @@ public class ListaChatsFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull ChatViewHolder holder, final int position) {
 
-            final Notice notice = chats.get(position);
+            final Discussion discussion = chats.get(position);
 
-            holder.autorTextView.setText(notice.getAutor());
-            holder.temaTextView.setText(notice.getTema());
+            holder.autorTextView.setText(discussion.name);
+            holder.temaTextView.setText(discussion.userfullname);
 
             Glide.with(requireActivity()).load(R.drawable.user_image).into(holder.imageViewAutor);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    noticeViewModel.establecerElementoSeleccionado(notice);
+                    noticeViewModel.establecerElementoSeleccionado(discussion);
                     navController.navigate(R.id.detalleChatFragment);
                 }
             });
@@ -103,7 +104,7 @@ public class ListaChatsFragment extends Fragment {
             return chats == null ? 0 : chats.size();
         }
 
-        public void establecerListaMensajes(List<Notice> chats){
+        public void establecerListaMensajes(List<Discussion> chats){
             this.chats = chats;
             notifyDataSetChanged();
         }

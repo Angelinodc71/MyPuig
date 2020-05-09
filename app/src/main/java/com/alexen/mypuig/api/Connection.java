@@ -4,59 +4,142 @@ import android.annotation.SuppressLint;
 import android.os.Build;
 import android.util.Log;
 
+import com.alexen.mypuig.viewmodel.NoticeViewModel;
+
+import java.io.IOException;
+
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-class Config {
-    static String baseUrl = "http://192.168.0.23/moodle/";
-    static String username = "admin";
-    static String password = "-Bakugan8";
-    static String courseId = "2";
-    static String forumid = "1";
-}
-
-
 public class Connection {
-
-    private static MoodleAPI api;
-
     private static String token;
-//    private static HashMap<String, String> id2username = new HashMap<>();
+    private static String baseUrl = "https://moodle.elpuig.xeill.net/";
+    private static String username = "adec58";
+    private static String password = "-Paranormales8";
+    private static String courseId = "277";
+    private static String forumid = "440";
 
-    public static void startConnection() {
-        Log.e("ABC","start");
-        Log.e("ABC",Config.baseUrl);
+    public static MoodleAPI api = new Retrofit.Builder()
+                .baseUrl(baseUrl)
+                .client(new OkHttpClient.Builder()
+                        .addInterceptor(new Interceptor() {
+                            @Override
+                            public okhttp3.Response intercept(Chain chain) throws IOException {
+                                Request request = chain.request();
 
-        api = new Retrofit.Builder()
-                .baseUrl(Config.baseUrl)
+                                long t1 = System.nanoTime();
+                                Log.e("INTERCEPTOR", String.format("Sending request %s on %s%n%s",
+                                        request.url(), chain.connection(), request.headers()));
+
+                                okhttp3.Response response = chain.proceed(request);
+
+                                long t2 = System.nanoTime();
+                                Log.e("INTERCEPTOR---", String.format("Received response for %s in %.1fms%n%s",
+                                        response.request().url(), (t2 - t1) / 1e6d, response.headers()));
+
+                                return response;
+                            }
+                        })
+                        .build()
+                )
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(MoodleAPI.class);
 
-        login();
-    }
 
-    private static void login() {
+    public static void login() {
         Log.e("ABC","login...");
-        Log.e("ABC",Config.username +Config.password);
+        Log.e("ABC",username +" "+password);
 
-        api.login(Config.username, Config.password).enqueue((Callback<Token>) response -> {
-            token = response.token;
-            Log.e("ABC","TOKEN = " + token);
+        api.login(username, password).enqueue(new Callback<Token>() {
+            @Override
+            public void onResponse(Call<Token> call, Response<Token> response) {
+                if(response.body() != null){
+//                    token = response.body().token;
+                    setToken(response.body().token);
+                    Log.e("ABC","TOKEN = " + token);
 
-            getDiscussions();
+                } else {
+                    Log.e("ABC", response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Token> call, Throwable t) {
+                Log.e("ABC", "Login connection failed");
+            }
+
         });
+    }
+//    public static void forum() {
+//        Log.e("ABC","forum...");
+//        Log.e("ABC",courseId);
+//
+//        api.courses(getToken()).enqueue(new Callback<Forum>() {
+//            @Override
+//            public void onResponse(Call<Forum> call, Response<Forum> response) {
+//                if(response.body() != null){
+//                    setForumid(response.body().id);
+//                    Log.e("ABC","ForumID = " + getForumid());
+////                    getDiscussions();
+//                } else {
+//                    Log.e("ABC", response.message());
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Forum> call, Throwable t) {
+//                Log.e("ABC", "Login connection failed");
+//            }
+//
+//        });
+//    }
 
+//    public static void getDiscussions() {
+//        Log.e("ABC","forum...");
+//
+//        api.discussions(token, forumid).enqueue(new Callback<Discussions>() {
+//            @Override
+//            public void onResponse(Call<Discussions> call, Response<Discussions> response) {
+//                Log.e("ABC", response.message());
+//                if(response.body() != null){
+//                    for(Discussion d: response.body().discussions) Log.e("ABC", d.toString());
+//                } else {
+//                    Log.e("ABC", response.message());
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Discussions> call, Throwable t) {
+//                Log.e("ABC", "getDiscussions connection failed");
+//            }
+//        });
+//    }
+
+
+    public static String getToken() {
+        return token;
     }
 
-    private static void getDiscussions() {
-        Log.e("ABC","forum...");
+    public static void setToken(String token) {
+        Connection.token = token;
+    }
 
-        api.discussions(token, Config.forumid).enqueue((Callback<Discussions>) response -> {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                response.discussions.forEach(d -> System.out.format("%s%n%s%n%s%n%s%n-----%n", d.id, d.name, d.message, d.subject));
-            }
-            Log.e("ABC",token);
-        });
+    public static void setForumid(String forumid) {
+        Connection.forumid = forumid;
+    }
+
+    public static String getForumid() {
+        return forumid;
+    }
+
+    public static String getCourseId() {
+        return courseId;
     }
 }

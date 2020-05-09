@@ -79,6 +79,9 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.nav_home:
                         fab.setVisibility(View.VISIBLE);
                         break;
+                    case R.id.moodleLoginFragment:
+                        toolbar.setVisibility(View.GONE);
+                        break;
                     default:
                         fab.setVisibility(View.GONE);
                         drawer.setVisibility(View.VISIBLE);

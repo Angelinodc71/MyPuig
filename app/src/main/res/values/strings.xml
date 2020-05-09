@@ -55,6 +55,9 @@
     <string name="localidad">Localidad</string>
     <string name="administraci_n_de_cuentas">ADMINISTRACIÓN DE CUENTAS</string>
     <string name="cerrar_sesi_n">CERRAR SESIÓN</string>
+    <string name="usuario">Usuario</string>
+    <string name="contrase_a">Contraseña</string>
+    <string name="siguiente">SIGUIENTE</string>
 
 
 </resources>

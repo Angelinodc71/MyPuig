@@ -20,8 +20,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Connection {
     private static String token;
     private static String baseUrl = "https://moodle.elpuig.xeill.net/";
-    private static String username = "adec58";
-    private static String password = "-Paranormales8";
     private static String courseId = "277";
     private static String forumid = "440";
 
@@ -53,7 +51,7 @@ public class Connection {
                 .create(MoodleAPI.class);
 
 
-    public static void login() {
+    public static void login(String username, String password) {
         Log.e("ABC","login...");
         Log.e("ABC",username +" "+password);
 

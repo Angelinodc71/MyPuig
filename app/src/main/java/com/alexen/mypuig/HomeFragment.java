@@ -87,7 +87,7 @@ public class HomeFragment extends Fragment {
 
 //            holder.userfullnameTextView.setText(discussions.getAutor());
 //            holder.nameTextView.setText(discussions.getTema());
-//            holder.mensajeTextView.setText(discussions.getMsgCorto());
+//            holder.messageTextView.setText(discussions.getMsgCorto());
 //            holder.timemodifiedTextView.setText(discussions.getFechaCorta());
 //            holder.favCheckBox.setChecked(discussions.getFavNotice());
 

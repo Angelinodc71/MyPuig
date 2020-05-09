@@ -35,7 +35,7 @@ public class DetalleNoticiaFragment extends Fragment {
 
     private boolean noticeFav;
     static Notice noticeTmp;
-    TextView autorTextView, temaTextView, mensajeTextView, fechaTextView;
+    TextView userfullnameTextView, nameTextView, messageTextView, createdTextView;
     CheckBox favCheckBox;
     public DetalleNoticiaFragment() {
         // Required empty public constructor
@@ -60,10 +60,10 @@ public class DetalleNoticiaFragment extends Fragment {
 
         noticeViewModel = ViewModelProviders.of(requireActivity()).get(NoticeViewModel.class);
 
-        autorTextView = view.findViewById(R.id.textViewAutorDetalle);
-        temaTextView = view.findViewById(R.id.textViewTemaDetalle);
-        mensajeTextView = view.findViewById(R.id.textViewMensajeDetalle);
-        fechaTextView = view.findViewById(R.id.TextViewFechaDetalle);
+        userfullnameTextView = view.findViewById(R.id.textViewAutorDetalle);
+        nameTextView = view.findViewById(R.id.textViewTemaDetalle);
+        messageTextView = view.findViewById(R.id.textViewMensajeDetalle);
+        createdTextView = view.findViewById(R.id.TextViewFechaDetalle);
 
         noticeViewModel.getNoticeSeleccionado().observe(getViewLifecycleOwner(), new Observer<Discussion>() {
             @Override
@@ -71,9 +71,10 @@ public class DetalleNoticiaFragment extends Fragment {
 
                 if(discussion == null) return;
 
-                autorTextView.setText(Html.fromHtml(discussion.name));
-                mensajeTextView.setText(Html.fromHtml(discussion.message));
-                fechaTextView.setText(Html.fromHtml(discussion.name));
+                userfullnameTextView.setText(discussion.userfullname);
+                nameTextView.setText(discussion.name);
+                messageTextView.setText(Html.fromHtml(discussion.message));
+                createdTextView.setText(TimeConverter.converter(discussion.created));
 //                noticeFav = discussion.getFavNotice();
 //                noticeTmp = discussion;
 //                noticeTmp.setFavNotice(noticeFav);
@@ -91,7 +92,7 @@ public class DetalleNoticiaFragment extends Fragment {
             case R.id.opcion_compartir:
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, mensajeTextView.getText().toString());
+                sendIntent.putExtra(Intent.EXTRA_TEXT, messageTextView.getText().toString());
                 sendIntent.setType("text/plain");
 
                 Intent shareIntent = Intent.createChooser(sendIntent, null);

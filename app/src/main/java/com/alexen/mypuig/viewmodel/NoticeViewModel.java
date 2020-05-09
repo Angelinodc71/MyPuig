@@ -34,12 +34,10 @@ public class NoticeViewModel extends AndroidViewModel {
 
     public NoticeViewModel(@NonNull Application application) {
         super(application);
-        rellenarListaNoticias();
 
     }
 
     public void rellenarListaNoticias(){
-//        Log.e("ABC",token);
         api.discussions(Connection.getToken(),Connection.getForumid()).enqueue(new Callback<Discussions>() {
             @Override
             public void onResponse(Call<Discussions> call, Response<Discussions> response) {

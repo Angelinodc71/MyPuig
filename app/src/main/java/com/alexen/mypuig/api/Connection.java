@@ -1,10 +1,6 @@
 package com.alexen.mypuig.api;
 
-import android.annotation.SuppressLint;
-import android.os.Build;
 import android.util.Log;
-
-import com.alexen.mypuig.viewmodel.NoticeViewModel;
 
 import java.io.IOException;
 

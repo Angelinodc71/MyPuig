@@ -17,12 +17,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.alexen.mypuig.api.Discussion;
-import com.alexen.mypuig.model.Notice;
-import com.alexen.mypuig.viewmodel.NoticeViewModel;
+import com.alexen.mypuig.viewmodel.MoodleViewModel;
 
 import java.util.List;
 
@@ -31,7 +29,7 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class FavoritosFragment extends Fragment {
-    NoticeViewModel noticeViewModel;
+    MoodleViewModel moodleViewModel;
     NavController navController;
     FavoritosAdapter favoritosAdapter;
 
@@ -53,7 +51,7 @@ public class FavoritosFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        noticeViewModel = ViewModelProviders.of(requireActivity()).get(NoticeViewModel.class);
+        moodleViewModel = ViewModelProviders.of(requireActivity()).get(MoodleViewModel.class);
         navController = Navigation.findNavController(view);
 
         RecyclerView elementosRecyclerView = view.findViewById(R.id.item_list_favoritos);
@@ -61,11 +59,11 @@ public class FavoritosFragment extends Fragment {
 
         favoritosAdapter = new FavoritosAdapter();
         elementosRecyclerView.setAdapter(favoritosAdapter);
-
-        noticeViewModel.getListaNotices().observe(getViewLifecycleOwner(), new Observer<List<Discussion>>() {
+        moodleViewModel.getNoticias.observe(getViewLifecycleOwner(), new Observer<List<Discussion>>() {
             @Override
             public void onChanged(List<Discussion> discussions) {
                 favoritosAdapter.establecerListaNoticias(discussions);
+
             }
         });
     }
@@ -84,7 +82,6 @@ public class FavoritosFragment extends Fragment {
         public void onBindViewHolder(@NonNull final FavoritosViewHolder holder, final int position) {
 
             final Discussion discussion = discussions.get(position);
-
             holder.autorTextView.setText(discussion.name);
             holder.temaTextView.setText(discussion.name);
             holder.mensajeTextView.setText(discussion.message);
@@ -100,14 +97,14 @@ public class FavoritosFragment extends Fragment {
             holder.chat.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    noticeViewModel.establecerElementoSeleccionado(discussion);
+                    moodleViewModel.establecerElementoSeleccionado(discussion);
                     navController.navigate(R.id.detalleChatFragment);
                 }
             });
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    noticeViewModel.establecerElementoSeleccionado(discussion);
+                    moodleViewModel.establecerElementoSeleccionado(discussion);
                     navController.navigate(R.id.detalleNoticiaFragment);
                 }
             });

@@ -20,13 +20,13 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alexen.mypuig.api.Discussion;
-import com.alexen.mypuig.viewmodel.NoticeViewModel;
+import com.alexen.mypuig.viewmodel.MoodleViewModel;
 
 import java.util.List;
 
 public class HomeFragment extends Fragment {
 
-    NoticeViewModel noticeViewModel;
+    MoodleViewModel moodleViewModel;
     NavController navController;
     FavoritosAdapter noticiasAdapter;
     ImageButton imageButton;
@@ -42,7 +42,7 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        noticeViewModel = ViewModelProviders.of(requireActivity()).get(NoticeViewModel.class);
+        moodleViewModel = ViewModelProviders.of(requireActivity()).get(MoodleViewModel.class);
         navController = Navigation.findNavController(view);
 
         RecyclerView elementosRecyclerView = view.findViewById(R.id.item_list_anuncios);
@@ -58,16 +58,13 @@ public class HomeFragment extends Fragment {
 
         noticiasAdapter = new FavoritosAdapter();
         elementosRecyclerView.setAdapter(noticiasAdapter);
-
-        noticeViewModel.getListaNotices().observe(getViewLifecycleOwner(), new Observer<List<Discussion>>() {
+        moodleViewModel.getNoticias.observe(getViewLifecycleOwner(), new Observer<List<Discussion>>() {
             @Override
             public void onChanged(List<Discussion> discussions) {
                 noticiasAdapter.establecerListaNoticias(discussions);
+
             }
         });
-
-
-
     }
 
     class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.NoticiasViewHolder>{
@@ -105,7 +102,7 @@ public class HomeFragment extends Fragment {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    noticeViewModel.establecerElementoSeleccionado(discussion);
+                    moodleViewModel.establecerElementoSeleccionado(discussion);
                     navController.navigate(R.id.detalleNoticiaFragment);
                 }
             });

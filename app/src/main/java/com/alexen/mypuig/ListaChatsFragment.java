@@ -1,7 +1,6 @@
 package com.alexen.mypuig;
 
 
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -21,8 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alexen.mypuig.api.Discussion;
-import com.alexen.mypuig.model.Notice;
-import com.alexen.mypuig.viewmodel.NoticeViewModel;
+import com.alexen.mypuig.viewmodel.MoodleViewModel;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
@@ -33,7 +31,7 @@ import java.util.List;
  */
 public class ListaChatsFragment extends Fragment {
 
-    NoticeViewModel noticeViewModel;
+    MoodleViewModel moodleViewModel;
     NavController navController;
     ChatAdapter chatAdapter;
     public ListaChatsFragment() {
@@ -52,7 +50,7 @@ public class ListaChatsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        noticeViewModel = ViewModelProviders.of(requireActivity()).get(NoticeViewModel.class);
+        moodleViewModel = ViewModelProviders.of(requireActivity()).get(MoodleViewModel.class);
         navController = Navigation.findNavController(view);
 
 
@@ -61,11 +59,11 @@ public class ListaChatsFragment extends Fragment {
 
         chatAdapter = new ChatAdapter();
         elementosRecyclerView.setAdapter(chatAdapter);
-
-        noticeViewModel.getListaNotices().observe(getViewLifecycleOwner(), new Observer<List<Discussion>>() {
+        moodleViewModel.getNoticias.observe(getViewLifecycleOwner(), new Observer<List<Discussion>>() {
             @Override
-            public void onChanged(List<Discussion> chats) {
-                chatAdapter.establecerListaMensajes(chats);
+            public void onChanged(List<Discussion> discussions) {
+                chatAdapter.establecerListaMensajes(discussions);
+
             }
         });
     }
@@ -92,7 +90,7 @@ public class ListaChatsFragment extends Fragment {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    noticeViewModel.establecerElementoSeleccionado(discussion);
+                    moodleViewModel.establecerElementoSeleccionado(discussion);
                     navController.navigate(R.id.detalleChatFragment);
                 }
             });

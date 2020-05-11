@@ -22,7 +22,7 @@ import android.widget.TextView;
 
 import com.alexen.mypuig.api.Discussion;
 import com.alexen.mypuig.model.Notice;
-import com.alexen.mypuig.viewmodel.NoticeViewModel;
+import com.alexen.mypuig.viewmodel.MoodleViewModel;
 import com.intrusoft.squint.DiagonalView;
 
 
@@ -31,7 +31,7 @@ import com.intrusoft.squint.DiagonalView;
  */
 public class DetalleNoticiaFragment extends Fragment {
 
-    NoticeViewModel noticeViewModel;
+    MoodleViewModel moodleViewModel;
 
     private boolean noticeFav;
     static Notice noticeTmp;
@@ -58,14 +58,14 @@ public class DetalleNoticiaFragment extends Fragment {
 
 
 
-        noticeViewModel = ViewModelProviders.of(requireActivity()).get(NoticeViewModel.class);
+        moodleViewModel = ViewModelProviders.of(requireActivity()).get(MoodleViewModel.class);
 
         userfullnameTextView = view.findViewById(R.id.textViewAutorDetalle);
         nameTextView = view.findViewById(R.id.textViewTemaDetalle);
         messageTextView = view.findViewById(R.id.textViewMensajeDetalle);
         createdTextView = view.findViewById(R.id.TextViewFechaDetalle);
 
-        noticeViewModel.getNoticeSeleccionado().observe(getViewLifecycleOwner(), new Observer<Discussion>() {
+        moodleViewModel.getNoticeSeleccionado().observe(getViewLifecycleOwner(), new Observer<Discussion>() {
             @Override
             public void onChanged(Discussion discussion) {
 

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -15,9 +16,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.alexen.mypuig.api.Connection;
-import com.alexen.mypuig.viewmodel.NoticeViewModel;
+import com.alexen.mypuig.viewmodel.MoodleViewModel;
 
 
 /**
@@ -28,7 +30,7 @@ public class MoodleLoginFragment extends Fragment {
     EditText usuarioEditText, contraseñaEditText;
     Button siguienteButton;
     NavController navController;
-    NoticeViewModel noticeViewModel;
+    MoodleViewModel moodleViewModel;
     public MoodleLoginFragment() {
         // Required empty public constructor
     }
@@ -44,20 +46,30 @@ public class MoodleLoginFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        noticeViewModel = ViewModelProviders.of(requireActivity()).get(NoticeViewModel.class);
+        moodleViewModel = ViewModelProviders.of(requireActivity()).get(MoodleViewModel.class);
         navController = Navigation.findNavController(view);
 
         usuarioEditText= view.findViewById(R.id.editTextUsuarioMoodle);
         contraseñaEditText = view.findViewById(R.id.editTextContraseñaMoodle);
 
         siguienteButton = view.findViewById(R.id.buttonSiguienteMoodle);
-
+        moodleViewModel.initialLogin();
         siguienteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Connection.login(usuarioEditText.getText().toString(), contraseñaEditText.getText().toString());
-                noticeViewModel.rellenarListaNoticias();
-                navController.navigate(R.id.nav_home);
+                moodleViewModel.login(usuarioEditText.getText().toString(), contraseñaEditText.getText().toString());
+            }
+        });
+        moodleViewModel.estadoLogin.observe(getViewLifecycleOwner(), new Observer<MoodleViewModel.EstadoLogin>() {
+            @Override
+            public void onChanged(MoodleViewModel.EstadoLogin estadoLogin) {
+                switch (estadoLogin) {
+                    case LOGINOK:
+                        navController.navigate(R.id.nav_home);
+                        break;
+                    case LOGINFAILED:
+                        Toast.makeText(requireContext(),"Login Failed",Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

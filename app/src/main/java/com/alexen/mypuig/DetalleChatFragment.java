@@ -17,7 +17,6 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,14 +30,11 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.alexen.mypuig.api.Discussion;
-import com.alexen.mypuig.model.Chat;
 import com.alexen.mypuig.model.Mensaje;
-import com.alexen.mypuig.model.Notice;
 import com.alexen.mypuig.viewmodel.ChatViewModel;
-import com.alexen.mypuig.viewmodel.NoticeViewModel;
+import com.alexen.mypuig.viewmodel.MoodleViewModel;
 import com.bumptech.glide.Glide;
 
-import java.io.File;
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
@@ -49,7 +45,7 @@ import static android.app.Activity.RESULT_OK;
  */
 public class DetalleChatFragment extends Fragment {
 
-    NoticeViewModel noticeViewModel;
+    MoodleViewModel moodleViewModel;
 
     ChatViewModel chatViewModel;
     NavController navController;
@@ -121,7 +117,7 @@ public class DetalleChatFragment extends Fragment {
         mensajeAdapter = new MensajeAdapter();
         elementosRecyclerView.setAdapter(mensajeAdapter);
 
-        noticeViewModel = ViewModelProviders.of(requireActivity()).get(NoticeViewModel.class);
+        moodleViewModel = ViewModelProviders.of(requireActivity()).get(MoodleViewModel.class);
 
         fechaTextView = view.findViewById(R.id.textViewFechaChat);
         temaTextView = view.findViewById(R.id.textViewTituloChat);
@@ -135,7 +131,7 @@ public class DetalleChatFragment extends Fragment {
             }
         });
 
-        noticeViewModel.getNoticeSeleccionado().observe(getViewLifecycleOwner(), new Observer<Discussion>() {
+        moodleViewModel.getNoticeSeleccionado().observe(getViewLifecycleOwner(), new Observer<Discussion>() {
             @Override
             public void onChanged(Discussion discussion) {
 

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/moodleLoginFragment">
+    app:startDestination="@id/loginSelectionFragment">
 
     <fragment
         android:id="@+id/nav_home"
@@ -60,5 +60,15 @@
         android:name="com.alexen.mypuig.MoodleLoginFragment"
         android:label="fragment_moodle_login"
         tools:layout="@layout/fragment_moodle_login" />
+    <fragment
+        android:id="@+id/loginSelectionFragment"
+        android:name="com.alexen.mypuig.LoginSelectionFragment"
+        android:label="fragment_login_selection"
+        tools:layout="@layout/fragment_login_selection" />
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.alexen.mypuig.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" />
 
 </navigation>

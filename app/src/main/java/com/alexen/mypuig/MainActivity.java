@@ -65,7 +65,8 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setTitleTextColor(Color.parseColor("#FF473A"));
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_about, R.id.nav_chat, R.id.nav_fav, R.id.nav_alert, R.id.nav_account,R.id.moodleLoginFragment)
+                R.id.nav_home, R.id.nav_about, R.id.nav_chat, R.id.nav_fav, R.id.nav_alert, R.id.nav_account,
+                R.id.moodleLoginFragment,R.id.loginFragment, R.id.loginSelectionFragment,R.id.registerFragment)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -83,6 +84,9 @@ public class MainActivity extends AppCompatActivity {
                         toolbar.setVisibility(View.VISIBLE);
                         break;
                     case R.id.moodleLoginFragment:
+                    case R.id.loginFragment:
+                    case R.id.loginSelectionFragment:
+                    case R.id.registerFragment:
                         toolbar.setVisibility(View.GONE);
                         fab.setVisibility(View.GONE);
                         break;

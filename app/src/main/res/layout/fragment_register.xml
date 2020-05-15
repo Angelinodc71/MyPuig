@@ -4,9 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".LoginFragment"
-    android:background="#81CCDC"
-    android:id="@+id/signInForm">
+    tools:context=".RegisterFragment"
+    android:background="#81CCDC">
 
     <com.wrapp.floatlabelededittext.FloatLabeledEditText
         android:id="@+id/floatLabeledEditText2"
@@ -15,16 +14,41 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
         android:backgroundTint="#3570E0"
-        app:layout_constraintBottom_toTopOf="@+id/floatLabeledEditText4"
+        app:layout_constraintBottom_toTopOf="@+id/floatLabeledEditText3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:targetApi="lollipop">
 
         <EditText
-            android:id="@+id/editTextUsuarioLogin"
+            android:id="@+id/editTextEmailRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/source_sans_pro_bold"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:textColorHint="#3570E0"
+            app:backgroundTint="#3570E0" />
+    </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+    <com.wrapp.floatlabelededittext.FloatLabeledEditText
+        android:id="@+id/floatLabeledEditText3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="#3570E0"
+        app:layout_constraintBottom_toTopOf="@+id/floatLabeledEditText4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/floatLabeledEditText2"
+        tools:targetApi="lollipop">
+
+        <EditText
+            android:id="@+id/editTextUsuarioRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/source_sans_pro_bold"
@@ -40,14 +64,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/floatLabeledEditText2">
+        app:layout_constraintTop_toBottomOf="@+id/floatLabeledEditText3">
 
         <EditText
-            android:id="@+id/editTextContraseñaLogin"
+            android:id="@+id/editTextContraseñaRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/source_sans_pro_bold"
@@ -58,14 +82,14 @@
     </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
     <Button
-        android:id="@+id/buttonIniciarSesion"
+        android:id="@+id/buttonRegistrarse"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:fontFamily="@font/source_sans_pro_bold"
-        android:text="@string/iniciar_sesi_n"
+        android:text="@string/registrarse"
         android:textColor="@color/white"
         android:textSize="18sp"
         app:backgroundTint="#E63570E0"
@@ -81,67 +105,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:fontFamily="@font/source_sans_pro_semibold"
-        android:text="@string/todav_a_no_tienes_cuenta"
+        android:text="@string/inicia_sesi_n_aqu"
         android:textColor="#1B1B1B"
         app:layout_constraintEnd_toStartOf="@+id/textViewCreaTuCuenta"
-        app:layout_constraintStart_toStartOf="@+id/buttonIniciarSesion"
-        app:layout_constraintTop_toBottomOf="@+id/buttonIniciarSesion" />
-
-    <TextView
-        android:id="@+id/textViewCreaTuCuenta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/source_sans_pro_bold"
-        android:text="@string/crea_tu_cuenta"
-        android:textColor="#1B1B1B"
-        app:layout_constraintStart_toEndOf="@+id/textViewTodavía_no_tienes_cuenta"
-        app:layout_constraintTop_toBottomOf="@+id/buttonIniciarSesion" />
-
-    <View
-        android:id="@+id/divider3"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:background="#1B1B1B"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTodavía_no_tienes_cuenta"
-        app:layout_constraintVertical_bias="0.060000002" />
-
-    <TextView
-        android:id="@+id/textViewIniciarSesionGoogle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:fontFamily="@font/source_sans_pro_semibold"
-        android:text="@string/iniciar_sesi_n_con_google"
-        android:textColor="#1B1B1B"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider3" />
-
-
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/buttonIniciarSesionGoogle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="32dp"
-        android:fontFamily="@font/source_sans_pro_bold"
-        android:text="@string/iniciar_sesi_n"
-        android:textColor="#4285F4"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewIniciarSesionGoogle" />
+        app:layout_constraintStart_toStartOf="@+id/buttonRegistrarse"
+        app:layout_constraintTop_toBottomOf="@+id/buttonRegistrarse" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

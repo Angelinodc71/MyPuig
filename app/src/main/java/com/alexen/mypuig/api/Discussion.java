@@ -1,6 +1,10 @@
 package com.alexen.mypuig.api;
 
-public class Discussion {
+import java.io.Serializable;
+
+public class Discussion implements Serializable {
+    public static final long serialVersionUID = 1L;
+
     int id;
     public String name;
     public String message;
@@ -8,6 +12,15 @@ public class Discussion {
     public String userfullname;
     public long created;
     public long timemodified;
+
+    public Discussion(String name, String message, String userpictureurl, String userfullname, long created, long timemodified) {
+        this.name = name;
+        this.message = message;
+        this.userpictureurl = userpictureurl;
+        this.userfullname = userfullname;
+        this.created = created;
+        this.timemodified = timemodified;
+    }
 
     @Override
     public String toString() {

@@ -8,28 +8,24 @@
     android:background="#81CCDC">
 
 
+    <!-- add some padding -->
     <ImageView
         android:id="@+id/imageViewAppIcon"
         android:layout_width="308dp"
         android:layout_height="282dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="32dp"
         android:src="@drawable/mypuigminiatura"
+        app:layout_constraintBottom_toTopOf="@+id/buttonIniciarSesionSelection"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
-    <!-- add some padding -->
     <Button
         android:id="@+id/buttonIniciarSesionSelection"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="66dp"
         android:fontFamily="@font/source_sans_pro_bold"
         android:text="@string/iniciar_sesi_n"
         android:textColor="@color/white"
@@ -37,6 +33,7 @@
         app:backgroundTint="#E63570E0"
         app:layout_constraintBottom_toTopOf="@+id/buttonRegisterSelection"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewAppIcon" />
 
@@ -45,15 +42,16 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:fontFamily="@font/source_sans_pro_bold"
         android:text="@string/registrarse"
         android:textColor="@color/white"
         android:textSize="18sp"
         app:backgroundTint="#E63570E0"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonIniciarSesionSelection" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonIniciarSesionSelection"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

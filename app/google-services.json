@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1038853157633-0k1o02pjn9bspvjm54otgmedg99vac18.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.alexen.mypuig",
+            "certificate_hash": "5207976176eda433d3db63721b4c7337eb392f91"
+          }
+        },
+        {
           "client_id": "1038853157633-ps4kb5ah6plc6g2rubrgud83jmoal1li.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

@@ -2,6 +2,7 @@ package com.alexen.mypuig;
 
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +21,20 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alexen.mypuig.api.Discussion;
+import com.alexen.mypuig.model.User;
 import com.alexen.mypuig.viewmodel.MoodleViewModel;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class HomeFragment extends Fragment {
 
@@ -30,6 +42,7 @@ public class HomeFragment extends Fragment {
     NavController navController;
     FavoritosAdapter noticiasAdapter;
     ImageButton imageButton;
+    FirebaseFirestore db;
 
     public HomeFragment() {}
 
@@ -41,6 +54,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        db = FirebaseFirestore.getInstance();
 
         moodleViewModel = ViewModelProviders.of(requireActivity()).get(MoodleViewModel.class);
         navController = Navigation.findNavController(view);
@@ -62,7 +76,6 @@ public class HomeFragment extends Fragment {
             @Override
             public void onChanged(List<Discussion> discussions) {
                 noticiasAdapter.establecerListaNoticias(discussions);
-
             }
         });
     }
@@ -81,12 +94,7 @@ public class HomeFragment extends Fragment {
         public void onBindViewHolder(@NonNull final NoticiasViewHolder holder, final int position) {
 
             final Discussion discussion = this.discussions.get(position);
-
-//            holder.userfullnameTextView.setText(discussions.getAutor());
-//            holder.nameTextView.setText(discussions.getTema());
-//            holder.messageTextView.setText(discussions.getMsgCorto());
-//            holder.timemodifiedTextView.setText(discussions.getFechaCorta());
-//            holder.favCheckBox.setChecked(discussions.getFavNotice());
+            guardarNoticias(discussion);
 
             holder.userfullnameTextView.setText(discussion.userfullname);
             holder.nameTextView.setText(discussion.name);
@@ -131,5 +139,27 @@ public class HomeFragment extends Fragment {
                 favCheckBox = itemView.findViewById(R.id.checkBoxFav);
             }
         }
+    }
+    public void guardarNoticias(Discussion discussion){
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        // Create a new user with a first and last name
+//        User user = new User(currentUser.getUid(),moodleViewModel.token.getValue());
+
+// Add a new document with a generated ID
+        db.collection("discussions")
+                .add(discussion)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error adding document", e);
+                    }
+                });
     }
 }

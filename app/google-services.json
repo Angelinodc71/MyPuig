@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1038853157633",
+    "firebase_url": "https://mypuig.firebaseio.com",
+    "project_id": "mypuig",
+    "storage_bucket": "mypuig.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1038853157633:android:687bffda7c6bc55e0d6100",
+        "android_client_info": {
+          "package_name": "com.alexen.mypuig"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1038853157633-ps4kb5ah6plc6g2rubrgud83jmoal1li.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.alexen.mypuig",
+            "certificate_hash": "b190be563b7b38167a50dc40909fc8c0e56f2452"
+          }
+        },
+        {
+          "client_id": "1038853157633-3fpadkld54v538e96bqjc9ksg66nra88.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUIxKNrukVUBeNfOQIDcaTJpAXWHS_KKo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1038853157633-3fpadkld54v538e96bqjc9ksg66nra88.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -30,20 +31,21 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements SearchView.OnQueryTextListener {
 
     MoodleViewModel moodleViewModel;
     NavController navController;
     FavoritosAdapter noticiasAdapter;
     ImageButton imageButton;
     FirebaseFirestore db;
-
+    SearchView searchView;
     public HomeFragment() {}
 
     @Override
@@ -59,6 +61,7 @@ public class HomeFragment extends Fragment {
         moodleViewModel = ViewModelProviders.of(requireActivity()).get(MoodleViewModel.class);
         navController = Navigation.findNavController(view);
 
+        searchView = view.findViewById(R.id.searchView);
         RecyclerView elementosRecyclerView = view.findViewById(R.id.item_list_anuncios);
 
         imageButton = view.findViewById(R.id.buttonFilter);
@@ -78,11 +81,48 @@ public class HomeFragment extends Fragment {
                 noticiasAdapter.establecerListaNoticias(discussions);
             }
         });
+
+        SearchView searchView = view.findViewById(R.id.searchView);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) { return false; }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                moodleViewModel.establecerTerminoBusqueda(s);
+                return false;
+            }
+        });
+    searchView.setOnQueryTextListener(this);
+
     }
+
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        String userInput = newText.toLowerCase();
+        List<Discussion> newList = new ArrayList<>();
+
+        for (Discussion discussion : noticiasAdapter.discussionsOriginal){
+            if (discussion.name.toLowerCase().contains(userInput)){
+                newList.add(discussion);
+            }
+        }
+        noticiasAdapter.updateList(newList);
+        return true;
+    }
+
 
     class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.NoticiasViewHolder>{
 
         List<Discussion> discussions;
+        List<Discussion> discussionsOriginal;
+
 
         @NonNull
         @Override
@@ -123,7 +163,14 @@ public class HomeFragment extends Fragment {
 
         public void establecerListaNoticias(List<Discussion> discussions){
             this.discussions = discussions;
+            this.discussionsOriginal = discussions;
             notifyDataSetChanged();
+        }
+
+        public void updateList(List<Discussion> newList){
+        discussions = new ArrayList<>();
+        discussions.addAll(newList);
+        notifyDataSetChanged();
         }
 
         class NoticiasViewHolder extends RecyclerView.ViewHolder {

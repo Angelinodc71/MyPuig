@@ -26,11 +26,13 @@ import retrofit2.Response;
 import static com.alexen.mypuig.api.Connection.api;
 
 public class MoodleViewModel extends AndroidViewModel {
+
     public enum EstadoLogin{
         INITIAL,
         LOGINOK,
         LOGINFAILED
     }
+    MutableLiveData<String> terminoBusqueda = new MutableLiveData<>();
 
     public MutableLiveData<EstadoLogin> estadoLogin = new MutableLiveData<>();
     public MutableLiveData<String> token = new MutableLiveData<>();
@@ -78,7 +80,8 @@ public class MoodleViewModel extends AndroidViewModel {
 
         });
     }
-    public LiveData<List<Discussion>> getNoticias= Transformations.switchMap(token, new Function<String, LiveData<List<Discussion>>>() {
+
+    public LiveData<List<Discussion>> getNoticias = Transformations.switchMap(token, new Function<String, LiveData<List<Discussion>>>() {
         @Override
         public LiveData<List<Discussion>> apply(String input) {
             api.discussions(input,Connection.getForumid()).enqueue(new Callback<Discussions>() {
@@ -109,7 +112,9 @@ public class MoodleViewModel extends AndroidViewModel {
 
         listaChats.setValue(chats);
     }
-
+    public void establecerTerminoBusqueda(String termino){
+        terminoBusqueda.setValue(termino);
+    }
 
     public void establecerElementoSeleccionado(Discussion discussion){
         noticeSeleccionado.setValue(discussion);

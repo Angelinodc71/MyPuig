@@ -5,34 +5,22 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.alexen.mypuig.api.Connection;
-import com.alexen.mypuig.model.User;
 import com.alexen.mypuig.viewmodel.MoodleViewModel;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
 /**
@@ -44,7 +32,8 @@ public class MoodleLoginFragment extends Fragment {
     Button siguienteButton;
     NavController navController;
     MoodleViewModel moodleViewModel;
-    FirebaseFirestore db;
+    ProgressBar progressBar;
+    ConstraintLayout displayForm;
     public MoodleLoginFragment() {
         // Required empty public constructor
     }
@@ -59,9 +48,12 @@ public class MoodleLoginFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        db = FirebaseFirestore.getInstance();
         moodleViewModel = ViewModelProviders.of(requireActivity()).get(MoodleViewModel.class);
         navController = Navigation.findNavController(view);
+        moodleViewModel.readDataUser();
+
+        progressBar = view.findViewById(R.id.progressBarMoodle);
+        displayForm = view.findViewById(R.id.displayFormMoodle);
 
         usuarioEditText= view.findViewById(R.id.editTextUsuarioMoodle);
         contraseñaEditText = view.findViewById(R.id.editTextContraseñaMoodle);
@@ -74,42 +66,37 @@ public class MoodleLoginFragment extends Fragment {
                 moodleViewModel.login(usuarioEditText.getText().toString(), contraseñaEditText.getText().toString());
             }
         });
+
+        moodleViewModel.estadoToken.observe(getViewLifecycleOwner(), new Observer<MoodleViewModel.EstadoToken>() {
+            @Override
+            public void onChanged(MoodleViewModel.EstadoToken estadoToken) {
+                switch (estadoToken){
+                    case TOKEN_NO_REGISTRADO:
+                        displayForm.setVisibility(View.VISIBLE);
+                        break;
+                    case TOKEN_REGISTRADO:
+                        progressBar.setVisibility(View.VISIBLE);
+                        moodleViewModel.estadoLogin.postValue(MoodleViewModel.EstadoLogin.LOGIN_OK);
+                        break;
+                }
+            }
+        });
+
         moodleViewModel.estadoLogin.observe(getViewLifecycleOwner(), new Observer<MoodleViewModel.EstadoLogin>() {
             @Override
             public void onChanged(MoodleViewModel.EstadoLogin estadoLogin) {
                 switch (estadoLogin) {
-                    case LOGINOK:
-                        subirDatos();
+                    case LOGIN_OK:
+                        moodleViewModel.addDataUser();
                         navController.navigate(R.id.nav_home);
                         break;
-                    case LOGINFAILED:
+                    case LOGIN_FAILED:
                         Toast.makeText(requireContext(),"Login Failed",Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
-    public void subirDatos(){
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        // Create a new user with a first and last name
-        User user = new User(currentUser.getUid(),moodleViewModel.token.getValue());
-
-// Add a new document with a generated ID
-        db.collection("users")
-                .add(user)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error adding document", e);
-                    }
-                });
-    }
 
 }

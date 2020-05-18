@@ -8,87 +8,111 @@
     android:background="#FFD88D">
 
 
-    <ImageView
-        android:id="@+id/imageViewMoodleIcon"
-        android:layout_width="308dp"
-        android:layout_height="282dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="108dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
-        android:src="@drawable/moodlelogo"
-        app:layout_constraintBottom_toTopOf="@+id/floatLabeledEditText2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.wrapp.floatlabelededittext.FloatLabeledEditText
-        android:id="@+id/floatLabeledEditText2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
-        android:backgroundTint="#FF6B00"
-        app:layout_constraintBottom_toTopOf="@+id/floatLabeledEditText4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewMoodleIcon">
-
-        <EditText
-            android:id="@+id/editTextUsuarioMoodle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/source_sans_pro_bold"
-            android:hint="@string/usuario"
-            android:inputType="textPersonName"
-            android:textColorHint="#FF6B00"
-            app:backgroundTint="#FF6B00" />
-    </com.wrapp.floatlabelededittext.FloatLabeledEditText>
-
-    <!-- add some padding -->
-    <com.wrapp.floatlabelededittext.FloatLabeledEditText
-        android:id="@+id/floatLabeledEditText4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonSiguienteMoodle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/floatLabeledEditText2">
-
-        <EditText
-            android:id="@+id/editTextContraseñaMoodle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/source_sans_pro_bold"
-            android:hint="@string/contrase_a"
-            android:inputType="textPassword"
-            android:textColorHint="#FF6B00"
-            app:backgroundTint="#FF6B00" />
-    </com.wrapp.floatlabelededittext.FloatLabeledEditText>
-
-    <Button
-        android:id="@+id/buttonSiguienteMoodle"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/displayFormMoodle"
         android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
-        android:fontFamily="@font/source_sans_pro_bold"
-        android:text="@string/siguiente"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:backgroundTint="#FF6B00"
+        android:layout_height="match_parent"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/floatLabeledEditText4"
-        app:layout_constraintVertical_bias="0.90999997" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <!-- password input -->
 
+        <ImageView
+            android:id="@+id/imageViewMoodleIcon"
+            android:layout_width="308dp"
+            android:layout_height="282dp"
+            android:layout_marginTop="108dp"
+            android:layout_marginBottom="32dp"
+            android:src="@drawable/moodlelogo"
+            app:layout_constraintBottom_toTopOf="@+id/floatLabeledEditText2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.wrapp.floatlabelededittext.FloatLabeledEditText
+            android:id="@+id/floatLabeledEditText2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="32dp"
+            android:backgroundTint="#FF6B00"
+            app:layout_constraintBottom_toTopOf="@+id/floatLabeledEditText4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewMoodleIcon">
+
+            <EditText
+                android:id="@+id/editTextUsuarioMoodle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/source_sans_pro_bold"
+                android:hint="@string/usuario"
+                android:inputType="textPersonName"
+                android:textColorHint="#FF6B00"
+                app:backgroundTint="#FF6B00" />
+        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+        <!-- add some padding -->
+        <com.wrapp.floatlabelededittext.FloatLabeledEditText
+            android:id="@+id/floatLabeledEditText4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toTopOf="@+id/buttonSiguienteMoodle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/floatLabeledEditText2">
+
+            <EditText
+                android:id="@+id/editTextContraseñaMoodle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/source_sans_pro_bold"
+                android:hint="@string/contrase_a"
+                android:inputType="textPassword"
+                android:textColorHint="#FF6B00"
+                app:backgroundTint="#FF6B00" />
+        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+        <Button
+            android:id="@+id/buttonSiguienteMoodle"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="32dp"
+            android:fontFamily="@font/source_sans_pro_bold"
+            android:text="@string/siguiente"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:backgroundTint="#FF6B00"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/floatLabeledEditText4"
+            app:layout_constraintVertical_bias="0.90999997" />
+
+        <!-- password input -->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBarMoodle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@android:dimen/notification_large_icon_width"
+        android:layout_marginTop="@android:dimen/notification_large_icon_height"
+        android:layout_marginEnd="@android:dimen/notification_large_icon_height"
+        android:layout_marginBottom="@android:dimen/notification_large_icon_height"
+        android:indeterminateDrawable="@drawable/progress"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

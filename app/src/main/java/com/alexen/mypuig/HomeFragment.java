@@ -44,7 +44,6 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
     NavController navController;
     FavoritosAdapter noticiasAdapter;
     ImageButton imageButton;
-    FirebaseFirestore db;
     SearchView searchView;
     public HomeFragment() {}
 
@@ -56,7 +55,6 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        db = FirebaseFirestore.getInstance();
 
         moodleViewModel = ViewModelProviders.of(requireActivity()).get(MoodleViewModel.class);
         navController = Navigation.findNavController(view);
@@ -82,18 +80,7 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
             }
         });
 
-        SearchView searchView = view.findViewById(R.id.searchView);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) { return false; }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-                moodleViewModel.establecerTerminoBusqueda(s);
-                return false;
-            }
-        });
-    searchView.setOnQueryTextListener(this);
+        searchView.setOnQueryTextListener(this);
 
     }
 
@@ -134,7 +121,6 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
         public void onBindViewHolder(@NonNull final NoticiasViewHolder holder, final int position) {
 
             final Discussion discussion = this.discussions.get(position);
-            guardarNoticias(discussion);
 
             holder.userfullnameTextView.setText(discussion.userfullname);
             holder.nameTextView.setText(discussion.name);
@@ -187,26 +173,5 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
             }
         }
     }
-    public void guardarNoticias(Discussion discussion){
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        // Create a new user with a first and last name
-//        User user = new User(currentUser.getUid(),moodleViewModel.token.getValue());
-
-// Add a new document with a generated ID
-        db.collection("discussions")
-                .add(discussion)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error adding document", e);
-                    }
-                });
-    }
 }

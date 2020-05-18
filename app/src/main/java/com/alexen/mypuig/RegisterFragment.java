@@ -74,7 +74,7 @@ public class RegisterFragment extends Fragment {
     }
 
     void updateUI(FirebaseUser currentUser) {
-        if (currentUser != null) Navigation.findNavController(getView()).navigate(R.id.nav_home);
+        if (currentUser != null) Navigation.findNavController(getView()).navigate(R.id.moodleLoginFragment);
 
     }
 

@@ -95,9 +95,11 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
         String userInput = newText.toLowerCase();
         List<Discussion> newList = new ArrayList<>();
 
-        for (Discussion discussion : noticiasAdapter.discussionsOriginal){
-            if (discussion.name.toLowerCase().contains(userInput)){
-                newList.add(discussion);
+        if (noticiasAdapter.discussionsOriginal!=null){
+            for (Discussion discussion : noticiasAdapter.discussionsOriginal){
+                if (discussion.name.toLowerCase().contains(userInput)){
+                    newList.add(discussion);
+                }
             }
         }
         noticiasAdapter.updateList(newList);

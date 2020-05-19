@@ -2,8 +2,7 @@ package com.alexen.mypuig.api;
 
 import java.io.Serializable;
 
-public class Discussion implements Serializable {
-    public static final long serialVersionUID = 1L;
+public class Discussion {
 
     int id;
     public String name;

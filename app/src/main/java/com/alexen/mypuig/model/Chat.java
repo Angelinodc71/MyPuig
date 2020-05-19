@@ -2,7 +2,7 @@ package com.alexen.mypuig.model;
 
 import java.io.Serializable;
 
-public class Chat implements Serializable {
+public class Chat {
 
     private String autor;
     private String tema;

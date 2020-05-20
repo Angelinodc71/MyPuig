@@ -31,8 +31,8 @@ public class OnBoardActivity extends AhoyOnboarderActivity {
             // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.READ_CONTACTS)) {
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
+                // Show an explanation to the userFavs *asynchronously* -- don't block
+                // this thread waiting for the userFavs's response! After the userFavs
                 // sees the explanation, try again to request the permission.
             } else {
                 // No explanation needed; request the permission
@@ -53,8 +53,8 @@ public class OnBoardActivity extends AhoyOnboarderActivity {
             // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.CAMERA)) {
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
+                // Show an explanation to the userFavs *asynchronously* -- don't block
+                // this thread waiting for the userFavs's response! After the userFavs
                 // sees the explanation, try again to request the permission.
             } else {
                 // No explanation needed; request the permission

@@ -88,6 +88,7 @@ public class MoodleLoginFragment extends Fragment {
                 switch (estadoLogin) {
                     case LOGIN_OK:
                         moodleViewModel.addDataUser();
+                        moodleViewModel.readFavsUser();
                         navController.navigate(R.id.nav_home);
                         break;
                     case LOGIN_FAILED:

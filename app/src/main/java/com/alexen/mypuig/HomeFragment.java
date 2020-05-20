@@ -7,42 +7,31 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alexen.mypuig.api.Discussion;
-import com.alexen.mypuig.model.User;
 import com.alexen.mypuig.viewmodel.MoodleViewModel;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class HomeFragment extends Fragment implements SearchView.OnQueryTextListener {
 
     MoodleViewModel moodleViewModel;
     NavController navController;
-    FavoritosAdapter noticiasAdapter;
+    HomeAdapter noticiasAdapter;
     ImageButton imageButton;
     SearchView searchView;
     public HomeFragment() {}
@@ -64,22 +53,22 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
 
         imageButton = view.findViewById(R.id.buttonFilter);
 
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navController.navigate(R.id.filtrarFragment);
-            }
-        });
+        imageButton.setOnClickListener(v -> navController.navigate(R.id.filtrarFragment));
 
-        noticiasAdapter = new FavoritosAdapter();
+        noticiasAdapter = new HomeAdapter();
         elementosRecyclerView.setAdapter(noticiasAdapter);
-        moodleViewModel.getNoticias.observe(getViewLifecycleOwner(), new Observer<List<Discussion>>() {
-            @Override
-            public void onChanged(List<Discussion> discussions) {
-                noticiasAdapter.establecerListaNoticias(discussions);
-            }
-        });
 
+
+
+        moodleViewModel.userFavs.observe(getViewLifecycleOwner(), user -> {
+            Log.e("ABC","63");
+            noticiasAdapter.establecerFavoritos(user.favs);
+
+        });
+        moodleViewModel.getNoticias.observe(getViewLifecycleOwner(), discussions -> {
+            Log.e("ABC","64");
+            noticiasAdapter.establecerListaNoticias(discussions);
+        });
         searchView.setOnQueryTextListener(this);
 
     }
@@ -107,9 +96,11 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
     }
 
 
-    class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.NoticiasViewHolder>{
+    class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.NoticiasViewHolder>{
 
         List<Discussion> discussions;
+        HashMap<String, Boolean> favs = new HashMap<>();
+
         List<Discussion> discussionsOriginal;
 
 
@@ -124,23 +115,23 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
 
             final Discussion discussion = this.discussions.get(position);
 
+
             holder.userfullnameTextView.setText(discussion.userfullname);
             holder.nameTextView.setText(discussion.name);
             holder.mensajeTextView.setText(Html.fromHtml(discussion.message));
             holder.timemodifiedTextView.setText(TimeConverter.converter(discussion.timemodified));
-            holder.favCheckBox.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    holder.favCheckBox.setChecked(isChecked);
+
+            holder.favCheckBox.setChecked(favs!=null && favs.containsKey(discussion.id));
+            holder.favCheckBox.setOnClickListener(v -> {
+                if (holder.favCheckBox.isChecked()){
+                    moodleViewModel.addDiscussionFav(discussion.id);
+                    Toast.makeText(getContext(),"Noticia Marcada",Toast.LENGTH_SHORT).show();
                 }
             });
 
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    moodleViewModel.establecerElementoSeleccionado(discussion);
-                    navController.navigate(R.id.detalleNoticiaFragment);
-                }
+            holder.itemView.setOnClickListener(view -> {
+                moodleViewModel.establecerElementoSeleccionado(discussion);
+                navController.navigate(R.id.detalleNoticiaFragment);
             });
         }
 
@@ -159,6 +150,11 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
         discussions = new ArrayList<>();
         discussions.addAll(newList);
         notifyDataSetChanged();
+        }
+
+        public void establecerFavoritos(HashMap<String, Boolean> favs) {
+            this.favs = favs;
+
         }
 
         class NoticiasViewHolder extends RecyclerView.ViewHolder {

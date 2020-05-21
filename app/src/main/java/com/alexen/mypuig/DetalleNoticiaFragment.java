@@ -17,13 +17,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.alexen.mypuig.api.Discussion;
-import com.alexen.mypuig.model.Notice;
 import com.alexen.mypuig.viewmodel.MoodleViewModel;
-import com.intrusoft.squint.DiagonalView;
 
 
 /**
@@ -33,10 +30,10 @@ public class DetalleNoticiaFragment extends Fragment {
 
     MoodleViewModel moodleViewModel;
 
-    private boolean noticeFav;
-    static Notice noticeTmp;
+    private boolean fav;
+    static Discussion discussion;
     TextView userfullnameTextView, nameTextView, messageTextView, createdTextView;
-    CheckBox favCheckBox;
+
     public DetalleNoticiaFragment() {
         // Required empty public constructor
     }
@@ -63,23 +60,16 @@ public class DetalleNoticiaFragment extends Fragment {
         messageTextView = view.findViewById(R.id.textViewMensajeDetalle);
         createdTextView = view.findViewById(R.id.TextViewFechaDetalle);
 
-        moodleViewModel.getNoticeSeleccionado().observe(getViewLifecycleOwner(), new Observer<Discussion>() {
-            @Override
-            public void onChanged(Discussion discussion) {
+        moodleViewModel.getNoticeSeleccionado().observe(getViewLifecycleOwner(), discussion -> {
 
-                if(discussion == null) return;
+            if(discussion == null) return;
 
-                userfullnameTextView.setText(discussion.userfullname);
-                nameTextView.setText(discussion.name);
-                messageTextView.setText(Html.fromHtml(discussion.message));
-                createdTextView.setText(TimeConverter.converter(discussion.created));
-//                noticeFav = discussion.getFavNotice();
-//                noticeTmp = discussion;
-//                noticeTmp.setFavNotice(noticeFav);
-//                if (discussion.getFavNotice()!=noticeTmp.getFavNotice()){
-//                    discussion.setFavNotice(discussion.getFavNotice());
-//                }
-            }
+            userfullnameTextView.setText(discussion.userfullname);
+            nameTextView.setText(discussion.name);
+            messageTextView.setText(Html.fromHtml(discussion.message));
+            createdTextView.setText(TimeConverter.converter(discussion.created));
+
+            fav = discussion.isFav;
         });
     }
 
@@ -98,7 +88,7 @@ public class DetalleNoticiaFragment extends Fragment {
                 return true;
 
             case R.id.opcion_borrar_favorito:
-                item.setVisible(false);
+                item.setVisible(true);
 
                 return true;
             default:
@@ -113,7 +103,7 @@ public class DetalleNoticiaFragment extends Fragment {
 
         MenuItem itemBorrarFav = menu.findItem(R.id.opcion_borrar_favorito);
 
-        if (!noticeFav){
+        if (!fav){
             itemBorrarFav.setVisible(false);
         }else {
             itemBorrarFav.setVisible(true);

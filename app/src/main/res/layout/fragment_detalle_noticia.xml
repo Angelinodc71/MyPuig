@@ -8,12 +8,15 @@
 
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorBackground"
         android:fillViewport="true"
-        tools:layout_editor_absoluteX="-63dp"
-        tools:layout_editor_absoluteY="48dp">
+        squint:layout_constraintBottom_toBottomOf="parent"
+        squint:layout_constraintEnd_toEndOf="parent"
+        squint:layout_constraintStart_toStartOf="parent"
+        squint:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -25,7 +28,7 @@
                 android:id="@+id/textViewMensajeDetalle"
                 android:layout_width="0dp"
                 android:layout_height="609dp"
-                android:layout_marginTop="216dp"
+                android:layout_marginTop="256dp"
                 android:fontFamily="@font/source_sans_pro"
                 android:text="@string/mensaje"
                 squint:layout_constraintEnd_toEndOf="parent"
@@ -59,28 +62,32 @@
     </androidx.core.widget.NestedScrollView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout9"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        squint:layout_constraintEnd_toEndOf="parent"
+        squint:layout_constraintStart_toStartOf="parent"
+        squint:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
 
         <com.intrusoft.squint.DiagonalView
             android:id="@+id/diagonalBlack"
-            android:layout_width="411dp"
-            android:layout_height="218dp"
+            android:layout_width="414dp"
+            android:layout_height="253dp"
             android:baselineAlignBottom="false"
             android:scaleType="centerCrop"
             android:src="@color/black"
-            squint:angle="20"
+            squint:angle="18"
             squint:diagonalDirection="left_to_right"
             squint:gravity="right"
+            squint:layout_constraintBottom_toBottomOf="parent"
             squint:layout_constraintEnd_toEndOf="parent"
             squint:layout_constraintHorizontal_bias="0.0"
-            squint:layout_constraintStart_toStartOf="parent"
-            squint:layout_constraintTop_toTopOf="parent" />
+            squint:layout_constraintStart_toStartOf="parent" />
 
         <com.intrusoft.squint.DiagonalView
             android:id="@+id/diagonal"
-            android:layout_width="0dp"
+            android:layout_width="421dp"
             android:layout_height="0dp"
             android:layout_marginStart="1dp"
             android:layout_marginTop="1dp"
@@ -89,29 +96,32 @@
             android:baselineAlignBottom="false"
             android:scaleType="centerCrop"
             android:src="#E9E9E9"
-            squint:angle="20"
+            squint:angle="18"
             squint:diagonalDirection="left_to_right"
             squint:gravity="right"
-            squint:layout_constraintBottom_toBottomOf="parent"
+            squint:layout_constraintBottom_toBottomOf="@+id/diagonalBlack"
             squint:layout_constraintEnd_toEndOf="parent"
             squint:layout_constraintHorizontal_bias="0.0"
             squint:layout_constraintStart_toStartOf="parent"
-            squint:layout_constraintTop_toTopOf="parent" />
+            squint:layout_constraintTop_toTopOf="parent"
+            squint:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/textViewTemaDetalle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="8dp"
             android:fontFamily="@font/source_sans_pro_bold"
-            android:text="@string/tema"
+            android:text="Barcelona Activa: TÈCNIC/A JUNIOR DE SISTEMES D’INFORMACIÓ persona graduada en CFGS en l’àmbit de Informàtica i comunicacions."
             android:textSize="24sp"
+            squint:layout_constraintBottom_toBottomOf="@+id/diagonalBlack"
             squint:layout_constraintEnd_toEndOf="parent"
             squint:layout_constraintHorizontal_bias="0.0"
             squint:layout_constraintStart_toStartOf="parent"
-            squint:layout_constraintTop_toTopOf="parent" />
+            squint:layout_constraintTop_toTopOf="@+id/diagonalBlack"
+            squint:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/textViewDe"
@@ -119,9 +129,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
+            android:layout_marginBottom="129dp"
             android:fontFamily="@font/source_sans_pro"
             android:text="@string/de"
-            squint:layout_constraintBottom_toBottomOf="parent"
+            squint:layout_constraintBottom_toBottomOf="@+id/diagonal"
             squint:layout_constraintStart_toStartOf="parent"
             squint:layout_constraintTop_toBottomOf="@+id/textViewTemaDetalle"
             squint:layout_constraintVertical_bias="0.0" />
@@ -129,14 +140,15 @@
         <TextView
             android:id="@+id/textViewAutorDetalle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="21dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
+            android:layout_marginBottom="130dp"
             android:fontFamily="@font/source_sans_pro_semibold"
             android:text="@string/autor"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
-            squint:layout_constraintBottom_toBottomOf="parent"
+            squint:layout_constraintBottom_toBottomOf="@+id/diagonalBlack"
             squint:layout_constraintStart_toEndOf="@+id/textViewDe"
             squint:layout_constraintTop_toBottomOf="@+id/textViewTemaDetalle"
             squint:layout_constraintVertical_bias="0.0" />

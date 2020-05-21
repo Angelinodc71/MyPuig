@@ -54,8 +54,6 @@ public class DetalleNoticiaFragment extends Fragment {
         setHasOptionsMenu(true);
 
 
-        DiagonalView diagonalView = view.findViewById(R.id.diagonal);
-
 
 
         moodleViewModel = ViewModelProviders.of(requireActivity()).get(MoodleViewModel.class);

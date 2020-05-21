@@ -157,7 +157,6 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
 
         public void establecerFavoritos(HashMap<String, Boolean> favs) {
             this.favs = favs;
-
         }
 
         class NoticiasViewHolder extends RecyclerView.ViewHolder {

@@ -12,16 +12,20 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alexen.mypuig.api.Discussion;
 import com.alexen.mypuig.viewmodel.MoodleViewModel;
 
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -59,6 +63,13 @@ public class FavoritosFragment extends Fragment {
 
         favoritosAdapter = new FavoritosAdapter();
         elementosRecyclerView.setAdapter(favoritosAdapter);
+
+        moodleViewModel.userFavs.observe(getViewLifecycleOwner(), user -> {
+            Log.e("ABC","63");
+            favoritosAdapter.establecerFavoritos(user.favs);
+
+        });
+
         moodleViewModel.getNoticias.observe(getViewLifecycleOwner(), new Observer<List<Discussion>>() {
             @Override
             public void onChanged(List<Discussion> discussions) {
@@ -71,6 +82,7 @@ public class FavoritosFragment extends Fragment {
     class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.FavoritosViewHolder>{
 
         List<Discussion> discussions;
+        HashMap<String, Boolean> favs = new HashMap<>();
 
         @NonNull
         @Override
@@ -84,15 +96,19 @@ public class FavoritosFragment extends Fragment {
             final Discussion discussion = discussions.get(position);
             holder.autorTextView.setText(discussion.name);
             holder.temaTextView.setText(discussion.name);
-            holder.mensajeTextView.setText(discussion.message);
-//            holder.timemodifiedTextView.setText(discussion.getFechaCorta());
-//            holder.favCheckBox.setChecked(discussion.getFavNotice());
-//            holder.favCheckBox.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener() {
-//                @Override
-//                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                    holder.favCheckBox.setChecked(isChecked);
-//                }
-//            });
+            holder.mensajeTextView.setText(Html.fromHtml(discussion.message));
+            holder.fechaTextView.setText(TimeConverter.converter(discussion.timemodified));
+
+            holder.favCheckBox.setChecked(favs!=null && favs.containsKey(discussion.id) && favs.get(discussion.id).booleanValue()==true);
+            holder.favCheckBox.setOnClickListener(v -> {
+                if (holder.favCheckBox.isChecked()){
+                    moodleViewModel.addDiscussionFav(discussion.id);
+                    Toast.makeText(getContext(),"Noticia Marcada",Toast.LENGTH_SHORT).show();
+                } else{
+                    moodleViewModel.removeDiscussionFav(discussion.id);
+                    Toast.makeText(getContext(),"Noticia Desmarcada",Toast.LENGTH_SHORT).show();
+                }
+            });
 
             holder.chat.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -119,7 +135,9 @@ public class FavoritosFragment extends Fragment {
             this.discussions = discussions;
             notifyDataSetChanged();
         }
-
+        public void establecerFavoritos(HashMap<String, Boolean> favs) {
+            this.favs = favs;
+        }
         class FavoritosViewHolder extends RecyclerView.ViewHolder {
             TextView autorTextView, temaTextView, mensajeTextView, fechaTextView;
             CheckBox favCheckBox;

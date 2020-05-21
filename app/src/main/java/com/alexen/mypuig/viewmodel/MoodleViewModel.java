@@ -1,5 +1,6 @@
 package com.alexen.mypuig.viewmodel;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.util.Log;
 
@@ -43,6 +44,8 @@ public class MoodleViewModel extends AndroidViewModel {
     FirebaseAuth firebaseAuth;
     FirebaseUser currentUser;
 
+
+
     public enum EstadoLogin{
         INITIAL,
         LOGIN_OK,
@@ -61,7 +64,6 @@ public class MoodleViewModel extends AndroidViewModel {
     public MutableLiveData<EstadoLogin> estadoLogin = new MutableLiveData<>();
     public MutableLiveData<EstadoToken> estadoToken = new MutableLiveData<>();
     public MutableLiveData<EstadoDiscussionFav> estadoDiscussionFav = new MutableLiveData<>();
-    public MutableLiveData<Boolean> discussionFav = new MutableLiveData<>();
 
     public MutableLiveData<User> userFavs = new MutableLiveData<>();
     public MutableLiveData<String> token = new MutableLiveData<>();
@@ -75,7 +77,6 @@ public class MoodleViewModel extends AndroidViewModel {
         super(application);
         db = FirebaseFirestore.getInstance();
         estadoDiscussionFav.setValue(EstadoDiscussionFav.INITIAL);
-        discussionFav.setValue(false);
     }
     public void initialLogin(){
         estadoLogin.setValue(EstadoLogin.INITIAL);
@@ -151,6 +152,21 @@ public class MoodleViewModel extends AndroidViewModel {
                 .addOnSuccessListener(aVoid -> Log.w(TAG, "TOKEN ->"+ discussionFav.toString()))
 //                .addOnSuccessListener((OnSuccessListener<DocumentReference>) documentReference -> Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId()))
                 .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));
+    }
+
+    @SuppressLint("NewApi")
+    public void removeDiscussionFav(String id) {
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        Discussion discussionFav = new Discussion(id);
+// Add a new document with a generated ID
+        Map<String, Map<String, Boolean>> data = new HashMap<>();
+        Map<String, Boolean> data2 = new HashMap<>();
+        data2.put(id,false);
+        data.put("favs",data2);
+        db.collection("favs")
+                .document(currentUser.getUid())
+                .set(data, SetOptions.merge());
     }
 
     public void addDataUser(){

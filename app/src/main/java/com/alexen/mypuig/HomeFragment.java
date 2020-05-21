@@ -121,11 +121,14 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
             holder.mensajeTextView.setText(Html.fromHtml(discussion.message));
             holder.timemodifiedTextView.setText(TimeConverter.converter(discussion.timemodified));
 
-            holder.favCheckBox.setChecked(favs!=null && favs.containsKey(discussion.id));
+            holder.favCheckBox.setChecked(favs!=null && favs.containsKey(discussion.id) && favs.get(discussion.id).booleanValue()==true);
             holder.favCheckBox.setOnClickListener(v -> {
                 if (holder.favCheckBox.isChecked()){
                     moodleViewModel.addDiscussionFav(discussion.id);
                     Toast.makeText(getContext(),"Noticia Marcada",Toast.LENGTH_SHORT).show();
+                } else{
+                    moodleViewModel.removeDiscussionFav(discussion.id);
+                    Toast.makeText(getContext(),"Noticia Desmarcada",Toast.LENGTH_SHORT).show();
                 }
             });
 

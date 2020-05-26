@@ -154,7 +154,7 @@ public class MoodleViewModel extends AndroidViewModel {
 //                    for(Discussion d: response.body().discussions) Log.e("ABC", d.toString());
                         listaNotices.postValue(response.body().discussions);
                         List<Discussion> newList = new ArrayList<>();
-                        if (listaNotices.getValue()!=null){
+                        if (listaNotices.getValue()!=null && listaFav.getValue()!=null){
                             for (Discussion discussion : listaNotices.getValue()){
                                 for (String id : listaFav.getValue()){
                                     if (discussion.id.contains(id)){

@@ -262,10 +262,10 @@ public class MoodleViewModel extends AndroidViewModel {
                         if (e!=null)return;
 
                         User userTmp = documentSnapshot.toObject(User.class);
-                        HashMap<String, Boolean> favsTmp = userTmp.favs;
-                        List<String> favId = new ArrayList<>();
-                        if (userTmp!=null){
 
+                        if (userTmp!=null){
+                            HashMap<String, Boolean> favsTmp = userTmp.favs;
+                            List<String> favId = new ArrayList<>();
                             favsTmp.forEach((k,v) -> {
                                 if (v)favId.add(k);
                             });

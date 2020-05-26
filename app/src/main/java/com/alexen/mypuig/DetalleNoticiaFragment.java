@@ -23,6 +23,8 @@ import android.widget.TextView;
 import com.alexen.mypuig.api.Discussion;
 import com.alexen.mypuig.viewmodel.MoodleViewModel;
 
+import java.util.List;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,7 +34,7 @@ public class DetalleNoticiaFragment extends Fragment {
     MoodleViewModel moodleViewModel;
 
     private boolean fav;
-    static Discussion discussion;
+    static Discussion d;
     TextView userfullnameTextView, nameTextView, messageTextView, createdTextView;
 
     public DetalleNoticiaFragment() {
@@ -69,8 +71,8 @@ public class DetalleNoticiaFragment extends Fragment {
             nameTextView.setText(discussion.name);
             messageTextView.setText(Html.fromHtml(discussion.message));
             createdTextView.setText(TimeConverter.converter(discussion.created));
-
-            fav = discussion.isFav;
+            d = discussion;
+            Log.e("ABC",d.id);
         });
     }
 
@@ -81,8 +83,8 @@ public class DetalleNoticiaFragment extends Fragment {
             case R.id.opcion_compartir:
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
-                Log.e("ABC", String.valueOf(Html.fromHtml(discussion.message)));
-                sendIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(discussion.message));
+                Log.e("ABC", String.valueOf(Html.fromHtml(d.message)));
+                sendIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(d.message));
                 sendIntent.setType("text/plain");
 
                 Intent shareIntent = Intent.createChooser(sendIntent, null);
@@ -90,8 +92,10 @@ public class DetalleNoticiaFragment extends Fragment {
                 return true;
 
             case R.id.opcion_borrar_favorito:
-                item.setVisible(true);
-
+                item.setVisible(false);
+                if (d!=null){
+                    moodleViewModel.removeDiscussionFav(d.id);
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -105,11 +109,8 @@ public class DetalleNoticiaFragment extends Fragment {
 
         MenuItem itemBorrarFav = menu.findItem(R.id.opcion_borrar_favorito);
 
-        if (!fav){
-            itemBorrarFav.setVisible(false);
-        }else {
-            itemBorrarFav.setVisible(true);
-        }
+
+
         // You can look up you menu item here and store it in a global variable by
         // 'mMenuItem = menu.findItem(R.id.my_menu_item);'
     }

@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -80,7 +81,8 @@ public class DetalleNoticiaFragment extends Fragment {
             case R.id.opcion_compartir:
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, messageTextView.getText().toString());
+                Log.e("ABC", String.valueOf(Html.fromHtml(discussion.message)));
+                sendIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(discussion.message));
                 sendIntent.setType("text/plain");
 
                 Intent shareIntent = Intent.createChooser(sendIntent, null);

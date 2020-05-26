@@ -1,6 +1,7 @@
 package com.alexen.mypuig;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -120,6 +121,20 @@ public class FavoritosFragment extends Fragment {
                     navController.navigate(R.id.detalleChatFragment);
                 }
             });
+            holder.share.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    moodleViewModel.establecerElementoSeleccionado(discussion);
+                    Intent sendIntent = new Intent();
+                    sendIntent.setAction(Intent.ACTION_SEND);
+                    Log.e("ABC", String.valueOf(Html.fromHtml(discussion.message)));
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(discussion.message));
+                    sendIntent.setType("text/plain");
+
+                    Intent shareIntent = Intent.createChooser(sendIntent, null);
+                    startActivity(shareIntent);
+                }
+            });
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -142,6 +157,7 @@ public class FavoritosFragment extends Fragment {
 
         public void establecerFavoritos(HashMap<String, Boolean> favs) {
             this.favs = favs;
+            notifyDataSetChanged();
         }
         class FavoritosViewHolder extends RecyclerView.ViewHolder {
             TextView autorTextView, temaTextView, mensajeTextView, fechaTextView;

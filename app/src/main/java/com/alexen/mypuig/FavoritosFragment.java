@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.alexen.mypuig.api.Discussion;
 import com.alexen.mypuig.viewmodel.MoodleViewModel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -70,11 +71,10 @@ public class FavoritosFragment extends Fragment {
 
         });
 
-        moodleViewModel.getNoticias.observe(getViewLifecycleOwner(), new Observer<List<Discussion>>() {
+        moodleViewModel.getNoticiasFav.observe(getViewLifecycleOwner(), new Observer<List<Discussion>>() {
             @Override
             public void onChanged(List<Discussion> discussions) {
                 favoritosAdapter.establecerListaNoticias(discussions);
-
             }
         });
     }
@@ -82,6 +82,7 @@ public class FavoritosFragment extends Fragment {
     class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.FavoritosViewHolder>{
 
         List<Discussion> discussions;
+
         HashMap<String, Boolean> favs = new HashMap<>();
 
         @NonNull
@@ -94,12 +95,14 @@ public class FavoritosFragment extends Fragment {
         public void onBindViewHolder(@NonNull final FavoritosViewHolder holder, final int position) {
 
             final Discussion discussion = discussions.get(position);
+
             holder.autorTextView.setText(discussion.name);
             holder.temaTextView.setText(discussion.name);
             holder.mensajeTextView.setText(Html.fromHtml(discussion.message));
             holder.fechaTextView.setText(TimeConverter.converter(discussion.timemodified));
 
             holder.favCheckBox.setChecked(favs!=null && favs.containsKey(discussion.id) && favs.get(discussion.id).booleanValue()==true);
+
             holder.favCheckBox.setOnClickListener(v -> {
                 if (holder.favCheckBox.isChecked()){
                     moodleViewModel.addDiscussionFav(discussion.id);
@@ -135,6 +138,8 @@ public class FavoritosFragment extends Fragment {
             this.discussions = discussions;
             notifyDataSetChanged();
         }
+
+
         public void establecerFavoritos(HashMap<String, Boolean> favs) {
             this.favs = favs;
         }

@@ -17,6 +17,7 @@ import com.alexen.mypuig.api.Discussions;
 import com.alexen.mypuig.api.Token;
 import com.alexen.mypuig.model.Chat;
 import com.alexen.mypuig.model.User;
+import com.google.common.io.LittleEndianDataInputStream;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -26,6 +27,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.SetOptions;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,6 +69,10 @@ public class MoodleViewModel extends AndroidViewModel {
 
     public MutableLiveData<User> userFavs = new MutableLiveData<>();
     public MutableLiveData<String> token = new MutableLiveData<>();
+
+    private MutableLiveData<List<String>> listaFav = new MutableLiveData<>();
+    private MutableLiveData<List<Discussion>> listaNoticesFav = new MutableLiveData<List<Discussion>>();
+
     private MutableLiveData<List<Discussion>> listaNotices = new MutableLiveData<List<Discussion>>();
     private MutableLiveData<Discussion> noticeSeleccionado = new MutableLiveData<>();
 
@@ -137,6 +143,41 @@ public class MoodleViewModel extends AndroidViewModel {
         }
     });
 
+    public LiveData<List<Discussion>> getNoticiasFav = Transformations.switchMap(token, new Function<String, LiveData<List<Discussion>>>() {
+        @Override
+        public LiveData<List<Discussion>> apply(String input) {
+            api.discussions(input,Connection.getForumid()).enqueue(new Callback<Discussions>() {
+                @Override
+                public void onResponse(Call<Discussions> call, Response<Discussions> response) {
+                    Log.e("ABC", response.message());
+                    if(response.body() != null){
+//                    for(Discussion d: response.body().discussions) Log.e("ABC", d.toString());
+                        listaNotices.postValue(response.body().discussions);
+                        List<Discussion> newList = new ArrayList<>();
+                        if (listaNotices.getValue()!=null){
+                            for (Discussion discussion : listaNotices.getValue()){
+                                for (String id : listaFav.getValue()){
+                                    if (discussion.id.contains(id)){
+                                        newList.add(discussion);
+                                        listaNoticesFav.postValue(newList);
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        Log.e("ABC", response.message());
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Discussions> call, Throwable t) {
+                    Log.e("ABC", "getDiscussions connection failed");
+                }
+            });
+            return listaNoticesFav;
+        }
+    });
+
     public void addDiscussionFav(String id){
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -180,7 +221,6 @@ public class MoodleViewModel extends AndroidViewModel {
                 .document(currentUser.getUid())
                 .set(user)
                 .addOnSuccessListener(aVoid -> Log.w(TAG, "TOKEN ->"+ user.token))
-//                .addOnSuccessListener((OnSuccessListener<DocumentReference>) documentReference -> Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId()))
                 .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));
     }
 
@@ -216,12 +256,20 @@ public class MoodleViewModel extends AndroidViewModel {
         db.collection("favs")
                 .document(currentUser.getUid())
                 .addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                    @SuppressLint("NewApi")
                     @Override
                     public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
                         if (e!=null)return;
 
                         User userTmp = documentSnapshot.toObject(User.class);
+                        HashMap<String, Boolean> favsTmp = userTmp.favs;
+                        List<String> favId = new ArrayList<>();
                         if (userTmp!=null){
+
+                            favsTmp.forEach((k,v) -> {
+                                if (v)favId.add(k);
+                            });
+                            listaFav.postValue(favId);
                             userFavs.postValue(userTmp);
                         }
                     }

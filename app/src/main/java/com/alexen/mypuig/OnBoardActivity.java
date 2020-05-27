@@ -68,39 +68,45 @@ public class OnBoardActivity extends AhoyOnboarderActivity {
             }
         }
         //1
-        AhoyOnboarderCard ahoyOnboarderCard1 = new AhoyOnboarderCard("SECURE", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vitae arcu rutrum, imperdiet tellus consequat, bibendum tellus.", R.drawable.secure);
+        AhoyOnboarderCard ahoyOnboarderCard1 = new AhoyOnboarderCard("COMPARTIBLE", "Comparte tus ofertas de trabajo con la gente a través de redes sociales.", R.drawable.secure);
         ahoyOnboarderCard1.setBackgroundColor(R.color.white);
         ahoyOnboarderCard1.setTitleColor(R.color.black);
         ahoyOnboarderCard1.setDescriptionColor(R.color.black);
         ahoyOnboarderCard1.setTitleTextSize(dpToPixels(8, this));
         ahoyOnboarderCard1.setDescriptionTextSize(dpToPixels(4, this));
+        ahoyOnboarderCard1.setIconLayoutParams(500,500,30,0,0,0);
         setColorBackground(R.color.white);
 
         //2
-        AhoyOnboarderCard ahoyOnboarderCard2 = new AhoyOnboarderCard("EASY ACCESSIBLE", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vitae arcu rutrum, imperdiet tellus consequat, bibendum tellus.", R.drawable.easy);
+        AhoyOnboarderCard ahoyOnboarderCard2 = new AhoyOnboarderCard("ACCESIBLE", "La herramienta más inteligente en su bolsillo, conecte sus cuentas una única vez y nosotros hacemos el trabajo duro.", R.drawable.easy);
         ahoyOnboarderCard2.setBackgroundColor(R.color.white);
         ahoyOnboarderCard2.setTitleColor(R.color.black);
         ahoyOnboarderCard2.setDescriptionColor(R.color.black);
-        ahoyOnboarderCard2.setTitleTextSize(dpToPixels(5, this));
+        ahoyOnboarderCard2.setTitleTextSize(dpToPixels(8, this));
         ahoyOnboarderCard2.setDescriptionTextSize(dpToPixels(4, this));
+        ahoyOnboarderCard1.setIconLayoutParams(500,500,30,0,0,0);
+
 
         //3
 
-        AhoyOnboarderCard ahoyOnboarderCard3 = new AhoyOnboarderCard("RELIABLE", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vitae arcu rutrum, imperdiet tellus consequat, bibendum tellus.", R.drawable.realiable);
+        AhoyOnboarderCard ahoyOnboarderCard3 = new AhoyOnboarderCard("FIABLE", "Mantenga varias formas de contactar y ponerse en contacto fácilmente desde la aplicación.", R.drawable.realiable);
         ahoyOnboarderCard3.setBackgroundColor(R.color.white);
         ahoyOnboarderCard3.setTitleColor(R.color.black);
         ahoyOnboarderCard3.setDescriptionColor(R.color.black);
         ahoyOnboarderCard3.setTitleTextSize(dpToPixels(8, this));
         ahoyOnboarderCard3.setDescriptionTextSize(dpToPixels(4, this));
+        ahoyOnboarderCard1.setIconLayoutParams(500,500,30,0,0,0);
+
 
         //4
 
-        AhoyOnboarderCard ahoyOnboarderCard4 = new AhoyOnboarderCard("LOREM IPSUM", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vitae arcu rutrum, imperdiet tellus consequat, bibendum tellus.", R.drawable.fin);
+        AhoyOnboarderCard ahoyOnboarderCard4 = new AhoyOnboarderCard("LISTO !", "Haga click en Comenzar para continuar.", R.drawable.fin);
         ahoyOnboarderCard4.setBackgroundColor(R.color.white);
         ahoyOnboarderCard4.setTitleColor(R.color.black);
         ahoyOnboarderCard4.setDescriptionColor(R.color.black);
         ahoyOnboarderCard4.setTitleTextSize(dpToPixels(6, this));
         ahoyOnboarderCard4.setDescriptionTextSize(dpToPixels(4, this));
+
 
         List<AhoyOnboarderCard> pages = new ArrayList<>();
         pages.add(ahoyOnboarderCard1);
@@ -110,7 +116,7 @@ public class OnBoardActivity extends AhoyOnboarderActivity {
 
         setOnboardPages(pages);
 
-        setFinishButtonTitle("Get Started");
+        setFinishButtonTitle("Comenzar");
 
 //Set the finish button style
         setFinishButtonDrawableStyle(ContextCompat.getDrawable(this, R.drawable.rounded_button));

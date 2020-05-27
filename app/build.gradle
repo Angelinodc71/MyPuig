@@ -61,5 +61,7 @@ dependencies {
     implementation 'com.wrapp.floatlabelededittext:library:0.0.6'
     implementation 'com.android.support:multidex:1.0.3'
 
+    implementation 'com.github.aakira:expandable-layout:1.6.0@aar'
+    implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
 
 }

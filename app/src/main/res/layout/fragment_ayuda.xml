@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".AyudaFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/expandableButton1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#2196f3"
+                android:drawableRight="@android:drawable/arrow_down_float"
+                android:paddingRight="10dp"
+                android:text="What Is Android"
+                android:fontFamily="@font/source_sans_pro_bold"
+                android:textColor="#fff" />
+
+            <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                android:id="@+id/expandableLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/expandableButton1"
+                android:background="#90caf9"
+                android:padding="16dp"
+                app:ael_duration="400"
+                app:ael_expanded="false"
+                app:ael_interpolator="accelerate"
+                app:ael_orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFFFF"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:text="Android is an open source and Linux-based Operating System for mobile devices such as smartphones and tablet computers. Android was developed by the Open Handset Alliance, led by Google, and other companies. The first beta version of the Android Software Development Kit (SDK) was released by Google in 2007 where as the first commercial version, Android 1.0, was released in September 2008." />
+            </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+            <Button
+                android:id="@+id/expandableButton2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/expandableLayout1"
+                android:background="#2196f3"
+                android:drawableRight="@android:drawable/arrow_down_float"
+                android:paddingRight="10dp"
+                android:text="Android Permission Model"
+                android:fontFamily="@font/source_sans_pro_bold"
+                android:textColor="#fff" />
+
+            <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                android:id="@+id/expandableLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/expandableButton2"
+                android:background="#90caf9"
+                android:padding="16dp"
+                app:ael_duration="400"
+                app:ael_expanded="true"
+                app:ael_interpolator="accelerate"
+                app:ael_orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFFFF"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:text="Android Permission Model designed for preventing unauthorized access by third party application.Android applications must declare which permission they require after installation. At a time of android application installation android system display list of permissions which is required to install the current application. The user must decide to install an application or not." />
+            </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+            <Button
+                android:id="@+id/expandableButton3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/expandableLayout2"
+                android:background="#2196f3"
+                android:drawableRight="@android:drawable/arrow_down_float"
+                android:paddingRight="10dp"
+                android:text="Android Debug Bridge"
+                android:fontFamily="@font/source_sans_pro_bold"
+                android:textColor="#fff" />
+
+            <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                android:id="@+id/expandableLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/expandableButton3"
+                android:background="#90caf9"
+                android:padding="16dp"
+                app:ael_duration="400"
+                app:ael_expanded="true"
+                app:ael_interpolator="accelerate"
+                app:ael_orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFFFF"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:text="With the help of android debug bridge we can communicate with an emulator or connected physical android device because Android Debug Bridge is a command line tool. Android Debug Bridge is also known as ADB. ADB architecture is like client-server architecture with three components." />
+            </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+            <Button
+                android:id="@+id/expandableButton4"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/expandableLayout3"
+                android:background="#2196f3"
+                android:drawableRight="@android:drawable/arrow_down_float"
+                android:paddingRight="10dp"
+                android:text="Open Handset Alliance"
+                android:fontFamily="@font/source_sans_pro_bold"
+                android:textColor="#fff" />
+
+            <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                android:id="@+id/expandableLayout4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/expandableButton4"
+                android:background="#90caf9"
+                android:padding="16dp"
+                app:ael_duration="400"
+                app:ael_expanded="true"
+                app:ael_interpolator="accelerate"
+                app:ael_orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFFFF"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:text="The Open Handset Alliance (OHA) was formed in November 2007. The OHA is a business alliance comprised of many of the largest and most successful mobile companies on the planet. Its members include chip makers, handset manufacturers, software developers, and service providers.The entire mobile supply chain is well represented." />
+            </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

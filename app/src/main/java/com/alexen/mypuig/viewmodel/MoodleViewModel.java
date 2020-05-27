@@ -266,9 +266,16 @@ public class MoodleViewModel extends AndroidViewModel {
                         if (userTmp!=null){
                             HashMap<String, Boolean> favsTmp = userTmp.favs;
                             List<String> favId = new ArrayList<>();
-                            favsTmp.forEach((k,v) -> {
+//                            favsTmp.forEach((k,v) -> {
+//                                if (v)favId.add(k);
+//                            });
+                            for(Map.Entry<String, Boolean> entry : favsTmp.entrySet()) {
+                                String k = entry.getKey();
+                                Boolean v = entry.getValue();
                                 if (v)favId.add(k);
-                            });
+                                // do what you have to do here
+                                // In your case, another loop.
+                            }
                             listaFav.postValue(favId);
                             userFavs.postValue(userTmp);
                         }

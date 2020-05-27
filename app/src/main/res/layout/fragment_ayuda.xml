@@ -20,11 +20,11 @@
                 android:id="@+id/expandableButton1"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="#2196f3"
+                android:background="@color/colorPrimary"
                 android:drawableRight="@android:drawable/arrow_down_float"
-                android:paddingRight="10dp"
-                android:text="What Is Android"
                 android:fontFamily="@font/source_sans_pro_bold"
+                android:paddingRight="10dp"
+                android:text="Como acceder a las ALERTAS"
                 android:textColor="#fff" />
 
             <com.github.aakira.expandablelayout.ExpandableRelativeLayout
@@ -32,7 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/expandableButton1"
-                android:background="#90caf9"
+                android:background="#8DB6F8"
                 android:padding="16dp"
                 app:ael_duration="400"
                 app:ael_expanded="false"
@@ -42,9 +42,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#FFFFFF"
                     android:fontFamily="@font/source_sans_pro"
-                    android:text="Android is an open source and Linux-based Operating System for mobile devices such as smartphones and tablet computers. Android was developed by the Open Handset Alliance, led by Google, and other companies. The first beta version of the Android Software Development Kit (SDK) was released by Google in 2007 where as the first commercial version, Android 1.0, was released in September 2008." />
+                    android:text="Para poder acceder a un criterio de busqueda, previamente se tiene que guardar. Por ello se debería acceder a la sección de Alertas, y seguido de esto nos permitirá administrar las notificaciones dependiendo del usuario. Finalmente se tiene que hacer tap en la flecha derecha del filtro creado y ya se podrá acceder a los términos de búsqueda anteriores."
+                    android:textColor="#FFFFFF" />
             </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
 
             <Button
@@ -55,7 +55,7 @@
                 android:background="#2196f3"
                 android:drawableRight="@android:drawable/arrow_down_float"
                 android:paddingRight="10dp"
-                android:text="Android Permission Model"
+                android:text="COMO CREAR UNA ALERTA"
                 android:fontFamily="@font/source_sans_pro_bold"
                 android:textColor="#fff" />
 
@@ -74,9 +74,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#FFFFFF"
                     android:fontFamily="@font/source_sans_pro"
-                    android:text="Android Permission Model designed for preventing unauthorized access by third party application.Android applications must declare which permission they require after installation. At a time of android application installation android system display list of permissions which is required to install the current application. The user must decide to install an application or not." />
+                    android:text="Para poder crear o almacenar alertas se debería que acceder a los filtros y poner algún parámetro en ellos. Para acceder a estos debemos ir al icono que se encuentra a la derecha de la barra de búsqueda situada en el Home. Una vez creado el filtro aparecerá un icono en el borde derecho inferior en el que al hacer tap nos guardara el criterio de búsqueda en las Alertas."
+                    android:textColor="#FFFFFF" />
             </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
 
             <Button
@@ -84,10 +84,10 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/expandableLayout2"
-                android:background="#2196f3"
+                android:background="@color/colorPrimary"
                 android:drawableRight="@android:drawable/arrow_down_float"
                 android:paddingRight="10dp"
-                android:text="Android Debug Bridge"
+                android:text="CHAT, PORQUE NO FUNCIONA LOS ARCHIVOS ?"
                 android:fontFamily="@font/source_sans_pro_bold"
                 android:textColor="#fff" />
 
@@ -96,7 +96,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/expandableButton3"
-                android:background="#90caf9"
+                android:background="#8DB6F8"
                 android:padding="16dp"
                 app:ael_duration="400"
                 app:ael_expanded="true"
@@ -106,9 +106,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#FFFFFF"
                     android:fontFamily="@font/source_sans_pro"
-                    android:text="With the help of android debug bridge we can communicate with an emulator or connected physical android device because Android Debug Bridge is a command line tool. Android Debug Bridge is also known as ADB. ADB architecture is like client-server architecture with three components." />
+                    android:text="Para poder utilizar el chat se tienen que tener activados los permisos de almacenamiento y la cámara, en el caso de haber cancelado estos avisos dirijase a la aplicación en ajustes y proporcione permisos, en ese caso podrá enviar archivos adjuntos para poder comunicarse con los diferentes profesores"
+                    android:textColor="#FFFFFF" />
             </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
 
             <Button
@@ -118,9 +118,9 @@
                 android:layout_below="@+id/expandableLayout3"
                 android:background="#2196f3"
                 android:drawableRight="@android:drawable/arrow_down_float"
-                android:paddingRight="10dp"
-                android:text="Open Handset Alliance"
                 android:fontFamily="@font/source_sans_pro_bold"
+                android:paddingRight="10dp"
+                android:text="FAVORITOS, PORQUE NO APARECE UNA NOTICIA MARCADA EN FAVORITOS ?"
                 android:textColor="#fff" />
 
             <com.github.aakira.expandablelayout.ExpandableRelativeLayout
@@ -138,9 +138,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#FFFFFF"
                     android:fontFamily="@font/source_sans_pro"
-                    android:text="The Open Handset Alliance (OHA) was formed in November 2007. The OHA is a business alliance comprised of many of the largest and most successful mobile companies on the planet. Its members include chip makers, handset manufacturers, software developers, and service providers.The entire mobile supply chain is well represented." />
+                    android:text="Para poder visualizar una noticia recientemente marcada en la pantalla de noticias de debe cerrar y abrir la aplicacion, ya que por el momento no ha sido posible optimizarlo, pero toda noticia que aparezca marcada en el home, estará marcada en favoritos."
+                    android:textColor="#FFFFFF" />
             </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
 
         </LinearLayout>

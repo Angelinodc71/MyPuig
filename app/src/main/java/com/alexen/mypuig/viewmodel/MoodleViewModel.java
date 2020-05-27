@@ -11,6 +11,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 
+import com.alexen.mypuig.MainActivity;
 import com.alexen.mypuig.api.Connection;
 import com.alexen.mypuig.api.Discussion;
 import com.alexen.mypuig.api.Discussions;
@@ -43,9 +44,8 @@ import static com.alexen.mypuig.api.Connection.api;
 
 public class MoodleViewModel extends AndroidViewModel {
     FirebaseFirestore db;
-    FirebaseAuth firebaseAuth;
     FirebaseUser currentUser;
-
+    FirebaseAuth mAuth;
 
 
     public enum EstadoLogin{
@@ -69,6 +69,8 @@ public class MoodleViewModel extends AndroidViewModel {
 
     public MutableLiveData<User> userFavs = new MutableLiveData<>();
     public MutableLiveData<String> token = new MutableLiveData<>();
+    public MutableLiveData<String> nombre = new MutableLiveData<>();
+    public MutableLiveData<Boolean> userCargado = new MutableLiveData<>();
 
     private MutableLiveData<List<String>> listaFav = new MutableLiveData<>();
     private MutableLiveData<List<Discussion>> listaNoticesFav = new MutableLiveData<List<Discussion>>();
@@ -83,10 +85,32 @@ public class MoodleViewModel extends AndroidViewModel {
         super(application);
         db = FirebaseFirestore.getInstance();
         estadoDiscussionFav.setValue(EstadoDiscussionFav.INITIAL);
+        mAuth = FirebaseAuth.getInstance();
+        userCargado.setValue(false);
     }
     public void initialLogin(){
         estadoLogin.setValue(EstadoLogin.INITIAL);
         estadoToken.setValue(EstadoToken.INITIAL);
+    }
+    public void cerrarSesion(){
+        currentUser = null;
+        token.postValue(null);
+        nombre.postValue(null);
+        userCargado.postValue(false);
+        mAuth.signOut();
+    }
+
+    public void guardarNombreUsuario(String username){
+        nombre.postValue(username);
+        addDataUser();
+    }
+    public String obtenerNombreUsuario(){
+        if (currentUser.getDisplayName().isEmpty() | currentUser.getDisplayName()==null){//iniciado sesion por correo
+            Log.e("ABC",nombre.getValue());
+            return nombre.getValue();
+        }else {//iniciado sesion por google
+            return currentUser.getDisplayName();
+        }
     }
     public void login(String username, String password) {
         Log.e("ABC","login...");
@@ -214,7 +238,7 @@ public class MoodleViewModel extends AndroidViewModel {
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         // Create a new userFavs with a first and last name
-        User user = new User(currentUser.getUid(),token.getValue());
+        User user = new User(currentUser.getUid(),token.getValue(),nombre.getValue());
 
 // Add a new document with a generated ID
         db.collection("users")
@@ -243,6 +267,7 @@ public class MoodleViewModel extends AndroidViewModel {
 
                                 estadoToken.postValue(EstadoToken.TOKEN_REGISTRADO);
                                 token.postValue(userTmp.token);
+                                nombre.postValue(userTmp.name);
                             }
                         }
                     }

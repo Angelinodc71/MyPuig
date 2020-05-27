@@ -75,5 +75,10 @@
         android:name="com.alexen.mypuig.AyudaFragment"
         android:label="fragment_ayuda"
         tools:layout="@layout/fragment_ayuda" />
+    <fragment
+        android:id="@+id/editarPerfilFragment"
+        android:name="com.alexen.mypuig.EditarPerfilFragment"
+        android:label="fragment_editar_perfil"
+        tools:layout="@layout/fragment_editar_perfil" />
 
 </navigation>

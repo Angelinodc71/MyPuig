@@ -25,6 +25,7 @@ public class LoginSelectionFragment extends Fragment {
 
     Button buttonLogin, buttonRegister;
     NavController navController;
+    private FirebaseAuth mAuth;
 
     public LoginSelectionFragment() {
         // Required empty public constructor
@@ -41,6 +42,7 @@ public class LoginSelectionFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mAuth = FirebaseAuth.getInstance();
         navController = Navigation.findNavController(view);
         buttonLogin = view.findViewById(R.id.buttonIniciarSesionSelection);
         buttonRegister = view.findViewById(R.id.buttonRegisterSelection);
@@ -58,5 +60,18 @@ public class LoginSelectionFragment extends Fragment {
                 navController.navigate(R.id.loginFragment);
             }
         });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        actualizarUI(currentUser);
+    }
+    private void actualizarUI(FirebaseUser currentUser) {
+        if(currentUser != null){
+            navController.navigate(R.id.moodleLoginFragment);
+        }
     }
 }

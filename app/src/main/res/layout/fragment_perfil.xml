@@ -8,152 +8,130 @@
     tools:context=".PerfilFragment"
     android:background="@color/colorBackground">
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout7"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/white"
+        android:padding="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonAdministracionCuentas"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.44">
+
+        <ImageView
+            android:id="@+id/imageViewBackground"
+            android:layout_width="0dp"
+            android:layout_height="118dp"
+            android:src="@drawable/imagebackground"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageViewPerfil"
+            android:layout_width="103dp"
+            android:layout_height="94dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageViewBackground"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewBackground"
+            app:srcCompat="@drawable/user_image" />
+
+        <TextView
+            android:id="@+id/textViewNamePerfil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:fontFamily="@font/source_sans_pro"
+            android:text="@string/nombre"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewPerfil" />
+
+        <TextView
+            android:id="@+id/textViewApellidosPerfil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:fontFamily="@font/source_sans_pro"
+            android:text="@string/apellidos"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewNamePerfil" />
+
+        <TextView
+            android:id="@+id/textViewNacimientoPerfil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:fontFamily="@font/source_sans_pro"
+            android:text="@string/nacimiento"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewApellidosPerfil" />
+
+        <TextView
+            android:id="@+id/textViewContactoPerfil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:fontFamily="@font/source_sans_pro"
+            android:text="@string/contacto"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewNacimientoPerfil" />
+
+        <TextView
+            android:id="@+id/textViewLocalidadPerfil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:fontFamily="@font/source_sans_pro"
+            android:text="@string/localidad"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewContactoPerfil" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/buttonAdministracionCuentas"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/white"
+        android:fontFamily="@font/source_sans_pro"
+        android:text="@string/administraci_n_de_cuentas"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonCerrarSesion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout7" />
+
+    <Button
+        android:id="@+id/buttonCerrarSesion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/white"
+        android:fontFamily="@font/source_sans_pro"
+        android:text="@string/cerrar_sesi_n"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout7"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:padding="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:id="@+id/imageViewBackground"
-                    android:layout_width="0dp"
-                    android:layout_height="118dp"
-                    android:src="@drawable/imagebackground"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageView
-                    android:id="@+id/imageViewPerfil"
-                    android:layout_width="103dp"
-                    android:layout_height="94dp"
-                    app:srcCompat="@drawable/user_image"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageViewBackground"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageViewBackground" />
-
-                <ImageView
-                    android:id="@+id/imageButton"
-                    android:layout_width="27dp"
-                    android:layout_height="28dp"
-                    android:background="#00000000"
-                    app:srcCompat="@drawable/editbutton"
-                    app:layout_constraintEnd_toEndOf="@+id/imageViewPerfil"
-                    app:layout_constraintTop_toTopOf="@+id/imageViewPerfil" />
-
-                <EditText
-                    android:id="@+id/editTextNamePerfil"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:ems="10"
-                    android:fontFamily="@font/source_sans_pro"
-                    android:inputType="textPersonName"
-                    android:text="@string/nombre"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageViewPerfil" />
-
-                <EditText
-                    android:id="@+id/editTextApellidosPerfil"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:ems="10"
-                    android:fontFamily="@font/source_sans_pro"
-                    android:inputType="textPersonName"
-                    android:text="@string/apellidos"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextNamePerfil" />
-
-                <EditText
-                    android:id="@+id/editTextNacimientoPerfil"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:ems="10"
-                    android:fontFamily="@font/source_sans_pro"
-                    android:inputType="textPersonName"
-                    android:text="@string/nacimiento"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextApellidosPerfil" />
-
-                <EditText
-                    android:id="@+id/editTextContactoPerfil"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:ems="10"
-                    android:fontFamily="@font/source_sans_pro"
-                    android:inputType="textPersonName"
-                    android:text="@string/contacto"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextNacimientoPerfil" />
-
-                <EditText
-                    android:id="@+id/editTextLocalidadPerfil"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:ems="10"
-                    android:fontFamily="@font/source_sans_pro"
-                    android:inputType="textPersonName"
-                    android:text="@string/localidad"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextContactoPerfil" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <Button
-                android:id="@+id/buttonAdministracionCuentas"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:background="@color/white"
-                android:fontFamily="@font/source_sans_pro"
-                android:text="@string/administraci_n_de_cuentas"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toTopOf="@+id/buttonCerrarSesion"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout7" />
-
-            <Button
-                android:id="@+id/buttonCerrarSesion"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@color/white"
-                android:fontFamily="@font/source_sans_pro"
-                android:text="@string/cerrar_sesi_n"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/buttonAdministracionCuentas" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
+        app:layout_constraintTop_toBottomOf="@+id/buttonAdministracionCuentas" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,9 +7,11 @@ import androidx.navigation.NavController;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 
 import com.codemybrainsout.onboarder.AhoyOnboarderActivity;
 import com.codemybrainsout.onboarder.AhoyOnboarderCard;
@@ -72,7 +74,7 @@ public class OnBoardActivity extends AhoyOnboarderActivity {
         ahoyOnboarderCard1.setBackgroundColor(R.color.white);
         ahoyOnboarderCard1.setTitleColor(R.color.black);
         ahoyOnboarderCard1.setDescriptionColor(R.color.black);
-        ahoyOnboarderCard1.setTitleTextSize(dpToPixels(8, this));
+        ahoyOnboarderCard1.setTitleTextSize(dpToPixels(5, this));
         ahoyOnboarderCard1.setDescriptionTextSize(dpToPixels(4, this));
         ahoyOnboarderCard1.setIconLayoutParams(500,500,30,0,0,0);
         setColorBackground(R.color.white);

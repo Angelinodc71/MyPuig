@@ -47,7 +47,7 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
 
         moodleViewModel = ViewModelProviders.of(requireActivity()).get(MoodleViewModel.class);
         navController = Navigation.findNavController(view);
-
+        moodleViewModel.userCargado.postValue(true);
         searchView = view.findViewById(R.id.searchView);
         RecyclerView elementosRecyclerView = view.findViewById(R.id.item_list_anuncios);
 

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 
 import android.util.Log;
@@ -14,7 +15,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.alexen.mypuig.viewmodel.MoodleViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -34,7 +37,7 @@ public class RegisterFragment extends Fragment {
     EditText emailEdit;
     EditText passwordEdit;
     EditText usernameEdit;
-
+    MoodleViewModel moodleViewModel;
     String email;
     String username;
     String password;
@@ -54,6 +57,7 @@ public class RegisterFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
+        moodleViewModel = ViewModelProviders.of(requireActivity()).get(MoodleViewModel.class);
 
         // Initialize Firebase Auth
         usernameEdit =view.findViewById(R.id.editTextUsuarioRegister);
@@ -68,6 +72,7 @@ public class RegisterFragment extends Fragment {
                 email = emailEdit.getText().toString();
                 password = passwordEdit.getText().toString();
                 username = usernameEdit.getText().toString();
+                moodleViewModel.guardarNombreUsuario(usernameEdit.getText().toString());
                 createAccount();
             }
         });

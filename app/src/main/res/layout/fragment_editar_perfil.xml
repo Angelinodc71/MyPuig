@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".EditarPerfilFragment"
+    android:id="@+id/constraintLayout8">
+
+
+    <ImageView
+        android:id="@+id/imageViewBackgroundEdit"
+        android:layout_width="0dp"
+        android:layout_height="118dp"
+        android:src="@drawable/imagebackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageViewPerfilEdit"
+            android:layout_width="103dp"
+            android:layout_height="94dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageViewBackgroundEdit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewBackgroundEdit"
+            app:srcCompat="@drawable/user_image" />
+
+        <ImageView
+            android:id="@+id/imageButtonEdit"
+            android:layout_width="27dp"
+            android:layout_height="28dp"
+            android:background="#00000000"
+            app:layout_constraintEnd_toEndOf="@+id/imageViewPerfilEdit"
+            app:layout_constraintTop_toTopOf="@+id/imageViewPerfilEdit"
+            app:srcCompat="@drawable/editbutton" />
+
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="32dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@+id/buttonGuardarCambiosPerfil"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewBackgroundEdit">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@id/constraintLayout9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.wrapp.floatlabelededittext.FloatLabeledEditText
+                android:id="@+id/floatLabeledEditTextPerfil1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:backgroundTint="#3570E0"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:targetApi="lollipop">
+
+                <EditText
+                    android:id="@+id/editTextNamePerfil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:ems="10"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:hint="@string/nombre" />
+            </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+            <com.wrapp.floatlabelededittext.FloatLabeledEditText
+                android:id="@+id/floatLabeledEditTextPerfil2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:backgroundTint="#3570E0"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/floatLabeledEditTextPerfil1"
+                tools:targetApi="lollipop">
+
+                <EditText
+                    android:id="@+id/editTextApellidosPerfil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:ems="10"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:hint="@string/apellidos" />
+            </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+            <com.wrapp.floatlabelededittext.FloatLabeledEditText
+                android:id="@+id/floatLabeledEditTextPerfil3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:backgroundTint="#3570E0"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/floatLabeledEditTextPerfil2"
+                tools:targetApi="lollipop">
+
+                <EditText
+                    android:id="@+id/editTextNacimientoPerfil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:ems="10"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:hint="@string/nacimiento" />
+
+            </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+            <com.wrapp.floatlabelededittext.FloatLabeledEditText
+                android:id="@+id/floatLabeledEditTextPerfil4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:backgroundTint="#3570E0"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/floatLabeledEditTextPerfil3"
+                tools:targetApi="lollipop">
+
+                <EditText
+                    android:id="@+id/editTextContactoPerfil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:ems="10"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:hint="@string/contacto" />
+
+            </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+            <com.wrapp.floatlabelededittext.FloatLabeledEditText
+                android:id="@+id/floatLabeledEditTextPerfil5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:backgroundTint="#3570E0"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/floatLabeledEditTextPerfil4"
+                app:layout_constraintVertical_bias="0.0"
+                tools:targetApi="lollipop">
+
+                <EditText
+                    android:id="@+id/editTextLocalidadPerfil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:ems="10"
+                    android:fontFamily="@font/source_sans_pro"
+                    android:hint="@string/localidad" />
+
+            </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <Button
+        android:id="@+id/buttonGuardarCambiosPerfil"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/white"
+        android:fontFamily="@font/source_sans_pro"
+        android:text="@string/guardar_cambios"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nestedScrollView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

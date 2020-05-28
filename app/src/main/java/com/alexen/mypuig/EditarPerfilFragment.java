@@ -66,8 +66,9 @@ public class EditarPerfilFragment extends Fragment {
         contacto = view.findViewById(R.id.editTextContactoPerfil);
         localidad = view.findViewById(R.id.editTextLocalidadPerfil);
         nombre.setText(moodleViewModel.obtenerNombreUsuario());
-        Glide.with(requireActivity()).load(moodleViewModel.imageAccount.getValue()).into(imageAccount);
-
+        if (moodleViewModel.imageAccount.getValue()!=null){
+            Glide.with(requireActivity()).load(Uri.parse(moodleViewModel.imageAccount.getValue())).into(imageAccount);
+        }
 
         guardarCambios.setOnClickListener(v -> {
             moodleViewModel.guardarCambiosPerfil(nombre.getText().toString(),moodleViewModel.imageAccount.getValue());

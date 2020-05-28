@@ -60,7 +60,9 @@ public class PerfilFragment extends Fragment {
         localidad = view.findViewById(R.id.textViewLocalidadPerfil);
 
         nombre.setText(moodleViewModel.obtenerNombreUsuario());
-        Glide.with(requireActivity()).load(Uri.parse(moodleViewModel.imageAccount.getValue())).into(imageAccount);
+        if (moodleViewModel.imageAccount.getValue()!=null){
+            Glide.with(requireActivity()).load(Uri.parse(moodleViewModel.imageAccount.getValue())).into(imageAccount);
+        }
 
         moodleViewModel.guardarCambiosPerfil(nombre.getText().toString(),moodleViewModel.imageAccount.getValue());
         editarPerfil.setOnClickListener(v -> navController.navigate(R.id.editarPerfilFragment));

@@ -70,7 +70,8 @@ public class MoodleViewModel extends AndroidViewModel {
     public MutableLiveData<User> userFavs = new MutableLiveData<>();
     public MutableLiveData<String> token = new MutableLiveData<>();
     public MutableLiveData<String> nombre = new MutableLiveData<>();
-    public MutableLiveData<Boolean> userCargado = new MutableLiveData<>();
+    public MutableLiveData<String> imageAccount = new MutableLiveData<>();
+
 
     private MutableLiveData<List<String>> listaFav = new MutableLiveData<>();
     private MutableLiveData<List<Discussion>> listaNoticesFav = new MutableLiveData<List<Discussion>>();
@@ -86,7 +87,6 @@ public class MoodleViewModel extends AndroidViewModel {
         db = FirebaseFirestore.getInstance();
         estadoDiscussionFav.setValue(EstadoDiscussionFav.INITIAL);
         mAuth = FirebaseAuth.getInstance();
-        userCargado.setValue(false);
     }
     public void initialLogin(){
         estadoLogin.setValue(EstadoLogin.INITIAL);
@@ -96,13 +96,22 @@ public class MoodleViewModel extends AndroidViewModel {
         currentUser = null;
         token.postValue(null);
         nombre.postValue(null);
-        userCargado.postValue(false);
+        imageAccount.postValue("drawable-hdpi/user_image.png");
         mAuth.signOut();
     }
 
-    public void guardarNombreUsuario(String username){
+    public void guardarCambiosPerfil(String username, String imageAccountUri){
         nombre.postValue(username);
+        imageAccount.postValue(imageAccountUri);
         addDataUser();
+    }
+    public String obtenerImagaenUsuario(){
+        if (currentUser.getDisplayName().isEmpty() | currentUser.getDisplayName()==null){//iniciado sesion por correo
+            Log.e("ABC",imageAccount.getValue());
+            return imageAccount.getValue();
+        }else {//iniciado sesion por google
+            return String.valueOf(currentUser.getPhotoUrl());
+        }
     }
     public String obtenerNombreUsuario(){
         if (currentUser.getDisplayName().isEmpty() | currentUser.getDisplayName()==null){//iniciado sesion por correo
@@ -238,7 +247,7 @@ public class MoodleViewModel extends AndroidViewModel {
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         // Create a new userFavs with a first and last name
-        User user = new User(currentUser.getUid(),token.getValue(),nombre.getValue());
+        User user = new User(currentUser.getUid(),token.getValue(),nombre.getValue(),imageAccount.getValue());
 
 // Add a new document with a generated ID
         db.collection("users")
@@ -268,6 +277,7 @@ public class MoodleViewModel extends AndroidViewModel {
                                 estadoToken.postValue(EstadoToken.TOKEN_REGISTRADO);
                                 token.postValue(userTmp.token);
                                 nombre.postValue(userTmp.name);
+                                imageAccount.postValue(userTmp.imageAccount);
                             }
                         }
                     }

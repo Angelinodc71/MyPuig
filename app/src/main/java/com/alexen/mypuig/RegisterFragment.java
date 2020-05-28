@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.alexen.mypuig.viewmodel.MoodleViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -72,7 +71,7 @@ public class RegisterFragment extends Fragment {
                 email = emailEdit.getText().toString();
                 password = passwordEdit.getText().toString();
                 username = usernameEdit.getText().toString();
-                moodleViewModel.guardarNombreUsuario(usernameEdit.getText().toString());
+                moodleViewModel.guardarCambiosPerfil(usernameEdit.getText().toString(),"drawable-hdpi/user_image.png");
                 createAccount();
             }
         });

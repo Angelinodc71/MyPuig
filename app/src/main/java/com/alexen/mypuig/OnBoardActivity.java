@@ -70,7 +70,7 @@ public class OnBoardActivity extends AhoyOnboarderActivity {
             }
         }
         //1
-        AhoyOnboarderCard ahoyOnboarderCard1 = new AhoyOnboarderCard("COMPARTIBLE", "Comparte tus ofertas de trabajo con la gente a través de redes sociales.", R.drawable.secure);
+        AhoyOnboarderCard ahoyOnboarderCard1 = new AhoyOnboarderCard("SOCIABLE", "Comparte tus ofertas de trabajo con la gente a través de redes sociales.", R.drawable.secure);
         ahoyOnboarderCard1.setBackgroundColor(R.color.white);
         ahoyOnboarderCard1.setTitleColor(R.color.black);
         ahoyOnboarderCard1.setDescriptionColor(R.color.black);

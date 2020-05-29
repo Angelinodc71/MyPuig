@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/source_sans_pro_bold"
-            android:hint="@string/usuario"
+            android:hint="@string/email"
             android:inputType="textPersonName"
             android:textColorHint="#3570E0"
             app:backgroundTint="#3570E0" />

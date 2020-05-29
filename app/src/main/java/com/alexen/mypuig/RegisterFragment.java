@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.alexen.mypuig.viewmodel.MoodleViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -40,6 +41,7 @@ public class RegisterFragment extends Fragment {
     String email;
     String username;
     String password;
+    TextView iniciarSesion;
     public RegisterFragment() {
         // Required empty public constructor
     }
@@ -63,8 +65,14 @@ public class RegisterFragment extends Fragment {
         emailEdit = view.findViewById(R.id.editTextEmailRegister);
         passwordEdit = view.findViewById(R.id.editTextContraseñaRegister);
         buttonRegistrar = view.findViewById(R.id.buttonRegistrarse);
+        iniciarSesion = view.findViewById(R.id.textViewTodavía_no_tienes_cuenta);
 
-
+        iniciarSesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(getView()).navigate(R.id.loginFragment);
+            }
+        });
         buttonRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

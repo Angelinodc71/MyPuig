@@ -103,7 +103,9 @@ public class MoodleViewModel extends AndroidViewModel {
     public void guardarCambiosPerfil(String username, String imageAccountUri){
         nombre.postValue(username);
         imageAccount.postValue(imageAccountUri);
-        addDataUser();
+        if (token.getValue()!=null){
+            addDataUser();
+        }
     }
     public String obtenerImagaenUsuario(){
         if (currentUser.getDisplayName().isEmpty() | currentUser.getDisplayName()==null){//iniciado sesion por correo
@@ -247,14 +249,15 @@ public class MoodleViewModel extends AndroidViewModel {
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         // Create a new userFavs with a first and last name
-        User user = new User(currentUser.getUid(),token.getValue(),nombre.getValue(),imageAccount.getValue());
+            User user = new User(currentUser.getUid(),token.getValue(),nombre.getValue(),imageAccount.getValue());
 
 // Add a new document with a generated ID
-        db.collection("users")
-                .document(currentUser.getUid())
-                .set(user)
-                .addOnSuccessListener(aVoid -> Log.w(TAG, "TOKEN ->"+ user.token))
-                .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));
+            db.collection("users")
+                    .document(currentUser.getUid())
+                    .set(user)
+                    .addOnSuccessListener(aVoid -> Log.w(TAG, "TOKEN ->"+ user.token))
+                    .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));
+
     }
 
     public void readDataUser(){

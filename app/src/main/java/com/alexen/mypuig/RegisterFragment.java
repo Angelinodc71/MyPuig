@@ -79,7 +79,6 @@ public class RegisterFragment extends Fragment {
                 email = emailEdit.getText().toString();
                 password = passwordEdit.getText().toString();
                 username = usernameEdit.getText().toString();
-                moodleViewModel.guardarCambiosPerfil(usernameEdit.getText().toString(),"drawable-hdpi/user_image.png");
                 createAccount();
             }
         });
@@ -96,6 +95,7 @@ public class RegisterFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            moodleViewModel.guardarCambiosPerfil(usernameEdit.getText().toString(),"drawable-hdpi/user_image.png");
                             // Sign in success, update UI with the signed-in userFavs's information
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
